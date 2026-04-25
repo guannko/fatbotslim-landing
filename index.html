@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FatBotSlim — AI счётчик калорий в Telegram</title>
+  <meta name="description" content="FatBotSlim — умный Telegram-бот для подсчёта калорий и трекинга питания на основе AI. Просто напишите что съели или пришлите фото — бот всё посчитает.">
+  <meta name="keywords" content="счётчик калорий телеграм, AI трекер питания, калории бот, fitbot, fatbotslim, похудение телеграм, трекер еды, подсчёт калорий, КБЖУ">
+  <meta property="og:title" content="FatBotSlim — AI счётчик калорий в Telegram">
+  <meta property="og:description" content="Умный Telegram-бот для подсчёта калорий. Напишите что съели или пришлите фото — AI посчитает КБЖУ мгновенно.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://fatbotslim.vercel.app">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="FatBotSlim — AI счётчик калорий в Telegram">
+  <meta name="twitter:description" content="Считай КБЖУ через Telegram. Текст или фото — AI всё посчитает.">
+  <link rel="canonical" href="https://fatbotslim.vercel.app">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            accent: '#22c55e',
+            'accent-dark': '#16a34a',
+            dark: '#0d0d0d',
+            'dark-card': '#1a1a1a',
+            'dark-border': '#2a2a2a',
+          },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    body { background-color: #0d0d0d; color: #ffffff; }
+    .gradient-text { background: linear-gradient(135deg, #22c55e, #84cc16); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .hero-gradient { background: radial-gradient(ellipse 80% 60% at 50% -10%, rgba(34,197,94,0.15), transparent); }
+    .card-gradient { background: linear-gradient(135deg, rgba(34,197,94,0.05), transparent); }
+    .btn-glow { box-shadow: 0 0 30px rgba(34,197,94,0.4); }
+    .btn-glow:hover { box-shadow: 0 0 50px rgba(34,197,94,0.6); }
+    @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
+    .float { animation: float 3s ease-in-out infinite; }
+    details summary::-webkit-details-marker { display: none; }
+    .plus { transition: transform 0.2s; display: inline-block; }
+    details[open] .plus { transform: rotate(45deg); }
+  </style>
+</head>
+<body class="font-sans antialiased">
+
+  <!-- NAV -->
+  <nav class="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-black/50 border-b border-white/5">
+    <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <span class="text-2xl">🥑</span>
+        <span class="font-bold text-lg tracking-tight">FatBotSlim</span>
+      </div>
+      <div class="hidden md:flex items-center gap-8 text-sm text-gray-400">
+        <a href="#features" class="hover:text-white transition">Возможности</a>
+        <a href="#how" class="hover:text-white transition">Как работает</a>
+        <a href="#pricing" class="hover:text-white transition">Цены</a>
+        <a href="#faq" class="hover:text-white transition">FAQ</a>
+      </div>
+      <a href="https://t.me/n8nfit_bot" target="_blank"
+         class="bg-accent hover:bg-accent-dark text-black font-semibold text-sm px-5 py-2.5 rounded-full transition btn-glow">
+        Попробовать бесплатно
+      </a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero-gradient min-h-screen flex flex-col items-center justify-center text-center px-4 pt-24 pb-16">
+    <div class="inline-flex items-center gap-2 bg-accent/10 border border-accent/20 rounded-full px-4 py-2 text-sm text-accent mb-8">
+      <span class="w-2 h-2 bg-accent rounded-full animate-pulse"></span>
+      AI-трекер питания в Telegram
+    </div>
+
+    <h1 class="text-5xl md:text-7xl font-black leading-tight mb-6 max-w-4xl">
+      Считай калории<br>
+      <span class="gradient-text">без таблиц и приложений</span>
+    </h1>
+
+    <p class="text-xl text-gray-400 max-w-2xl mb-10 leading-relaxed">
+      Просто напиши что съел или пришли фото блюда — FatBotSlim мгновенно посчитает калории, белки, жиры и углеводы. Никаких ручных вводов, всё через Telegram.
+    </p>
+
+    <div class="flex flex-col sm:flex-row gap-4 justify-center mb-16">
+      <a href="https://t.me/n8nfit_bot" target="_blank"
+         class="bg-accent hover:bg-accent-dark text-black font-bold text-lg px-8 py-4 rounded-2xl transition btn-glow flex items-center justify-center gap-3">
+        <span>✈️</span> Открыть в Telegram
+      </a>
+      <a href="#how"
+         class="border border-white/10 hover:border-white/30 text-white font-semibold text-lg px-8 py-4 rounded-2xl transition flex items-center justify-center gap-3">
+        Как это работает <span>↓</span>
+      </a>
+    </div>
+
+    <!-- Chat Mockup -->
+    <div class="float max-w-sm w-full mx-auto bg-[#1a1a1a] border border-[#2a2a2a] rounded-3xl p-5 text-left shadow-2xl">
+      <div class="flex items-center gap-3 mb-4 pb-4 border-b border-[#2a2a2a]">
+        <div class="w-10 h-10 rounded-full bg-accent/20 flex items-center justify-center text-xl">🥑</div>
+        <div>
+          <div class="font-semibold text-sm">FatBotSlim</div>
+          <div class="text-xs text-green-400">● online</div>
+        </div>
+      </div>
+      <div class="space-y-3 text-sm">
+        <div class="flex justify-end">
+          <div class="bg-accent/20 text-white rounded-2xl rounded-tr-sm px-4 py-2.5">
+            Гречка с курицей 200г
+          </div>
+        </div>
+        <div class="flex justify-start">
+          <div class="bg-[#2a2a2a] rounded-2xl rounded-tl-sm px-4 py-3 max-w-xs">
+            <div class="font-semibold text-accent mb-1">✅ Записано!</div>
+            <div class="text-gray-300 text-sm">Гречка с курицей (200г)</div>
+            <div class="mt-2 grid grid-cols-2 gap-x-4 gap-y-1 text-xs text-gray-400">
+              <span>🔥 <span class="text-white font-medium">284 ккал</span></span>
+              <span>💪 Б: <span class="text-white font-medium">28г</span></span>
+              <span>🧈 Ж: <span class="text-white font-medium">6г</span></span>
+              <span>🌾 У: <span class="text-white font-medium">32г</span></span>
+            </div>
+          </div>
+        </div>
+        <div class="flex justify-end">
+          <div class="bg-accent/20 text-white rounded-2xl rounded-tr-sm px-4 py-2.5">
+            📅 Итоги дня
+          </div>
+        </div>
+        <div class="flex justify-start">
+          <div class="bg-[#2a2a2a] rounded-2xl rounded-tl-sm px-4 py-3 w-full max-w-xs">
+            <div class="font-semibold mb-2 text-sm">📊 Сегодня</div>
+            <div class="text-xs text-gray-400 space-y-2">
+              <div class="flex justify-between">
+                <span>🔥 Калории</span>
+                <span class="text-white font-medium">1 840 / 2 200 ккал</span>
+              </div>
+              <div class="w-full bg-[#0d0d0d] rounded-full h-1.5">
+                <div class="bg-accent h-1.5 rounded-full" style="width:83%"></div>
+              </div>
+              <div class="text-right text-accent text-xs">83% от нормы</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <p class="mt-8 text-sm text-gray-600">Бесплатно · Не нужно устанавливать приложение · Работает сразу</p>
+  </section>
+
+  <!-- STATS -->
+  <section class="py-16 border-y border-white/5">
+    <div class="max-w-4xl mx-auto px-4 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+      <div>
+        <div class="text-4xl font-black gradient-text">AI</div>
+        <div class="text-gray-500 text-sm mt-1">распознавание блюд</div>
+      </div>
+      <div>
+        <div class="text-4xl font-black gradient-text">КБЖУ</div>
+        <div class="text-gray-500 text-sm mt-1">мгновенно</div>
+      </div>
+      <div>
+        <div class="text-4xl font-black gradient-text">24/7</div>
+        <div class="text-gray-500 text-sm mt-1">работает всегда</div>
+      </div>
+      <div>
+        <div class="text-4xl font-black gradient-text">€10</div>
+        <div class="text-gray-500 text-sm mt-1">в месяц за Premium</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section id="features" class="py-24 px-4">
+    <div class="max-w-6xl mx-auto">
+      <h2 class="text-4xl md:text-5xl font-black text-center mb-4">
+        Всё что нужно для<br><span class="gradient-text">контроля питания</span>
+      </h2>
+      <p class="text-gray-400 text-center mb-16 max-w-2xl mx-auto">Никаких сложных приложений. Просто Telegram, в котором ты уже сидишь.</p>
+
+      <div class="grid md:grid-cols-3 gap-6">
+        <div class="card-gradient border border-[#2a2a2a] rounded-3xl p-6 hover:border-accent/30 transition">
+          <div class="text-4xl mb-4">📸</div>
+          <h3 class="text-xl font-bold mb-2">Фото → Калории</h3>
+          <p class="text-gray-400 text-sm leading-relaxed">Сфотографируй блюдо и отправь боту. AI распознает еду и посчитает КБЖУ автоматически — никакого ручного поиска.</p>
+        </div>
+        <div class="card-gradient border border-[#2a2a2a] rounded-3xl p-6 hover:border-accent/30 transition">
+          <div class="text-4xl mb-4">💬</div>
+          <h3 class="text-xl font-bold mb-2">Текст → Калории</h3>
+          <p class="text-gray-400 text-sm leading-relaxed">Напиши «борщ 300г» или «2 яйца с тостом» — бот поймёт и запишет. Работает на русском и английском.</p>
+        </div>
+        <div class="card-gradient border border-[#2a2a2a] rounded-3xl p-6 hover:border-accent/30 transition">
+          <div class="text-4xl mb-4">📊</div>
+          <h3 class="text-xl font-bold mb-2">Итоги дня</h3>
+          <p class="text-gray-400 text-sm leading-relaxed">В любой момент посмотри сколько ккал и нутриентов съел сегодня. С прогресс-баром относительно нормы.</p>
+        </div>
+        <div class="card-gradient border border-[#2a2a2a] rounded-3xl p-6 hover:border-accent/30 transition">
+          <div class="text-4xl mb-4">📈</div>
+          <h3 class="text-xl font-bold mb-2">График прогресса</h3>
+          <p class="text-gray-400 text-sm leading-relaxed">Смотри тренды за 7 и 30 дней. Следи за динамикой питания без экспорта данных и лишних экранов.</p>
+        </div>
+        <div class="card-gradient border border-[#2a2a2a] rounded-3xl p-6 hover:border-accent/30 transition">
+          <div class="text-4xl mb-4">🎯</div>
+          <h3 class="text-xl font-bold mb-2">Личные цели</h3>
+          <p class="text-gray-400 text-sm leading-relaxed">Установи свою норму калорий. Бот всегда покажет сколько ещё можно съесть до конца дня.</p>
+        </div>
+        <div class="card-gradient border border-[#2a2a2a] rounded-3xl p-6 hover:border-accent/30 transition">
+          <div class="text-4xl mb-4">✏️</div>
+          <h3 class="text-xl font-bold mb-2">Редактирование</h3>
+          <p class="text-gray-400 text-sm leading-relaxed">Ошибся с граммовкой? Бот позволит скорректировать любую запись прямо в чате без перезапуска.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section id="how" class="py-24 px-4 bg-[#1a1a1a]/40">
+    <div class="max-w-4xl mx-auto text-center">
+      <h2 class="text-4xl md:text-5xl font-black mb-4">
+        Три шага<br><span class="gradient-text">до результата</span>
+      </h2>
+      <p class="text-gray-400 mb-16 max-w-xl mx-auto">Настройка занимает 30 секунд. Дальше — просто пиши что ешь.</p>
+
+      <div class="grid md:grid-cols-3 gap-12">
+        <div class="flex flex-col items-center">
+          <div class="w-16 h-16 rounded-2xl bg-accent/10 border border-accent/30 flex items-center justify-center text-2xl font-black text-accent mb-5">
+            1
+          </div>
+          <h3 class="font-bold text-lg mb-2">Открой бота</h3>
+          <p class="text-gray-400 text-sm leading-relaxed">Нажми Start в @n8nfit_bot и выбери язык интерфейса. Займёт 10 секунд.</p>
+        </div>
+        <div class="flex flex-col items-center">
+          <div class="w-16 h-16 rounded-2xl bg-accent/10 border border-accent/30 flex items-center justify-center text-2xl font-black text-accent mb-5">
+            2
+          </div>
+          <h3 class="font-bold text-lg mb-2">Укажи норму</h3>
+          <p class="text-gray-400 text-sm leading-relaxed">Установи свою дневную норму калорий. Бот будет ориентироваться на неё при подсчёте.</p>
+        </div>
+        <div class="flex flex-col items-center">
+          <div class="w-16 h-16 rounded-2xl bg-accent/10 border border-accent/30 flex items-center justify-center text-2xl font-black text-accent mb-5">
+            3
+          </div>
+          <h3 class="font-bold text-lg mb-2">Отправляй еду</h3>
+          <p class="text-gray-400 text-sm leading-relaxed">Текст или фото — бот считает и записывает КБЖУ. Смотри итоги в любое время.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VIDEO PLACEHOLDER -->
+  <section class="py-16 px-4">
+    <div class="max-w-3xl mx-auto">
+      <div class="bg-[#1a1a1a] border border-[#2a2a2a] rounded-3xl aspect-video flex flex-col items-center justify-center text-center p-8">
+        <div class="text-6xl mb-4">▶️</div>
+        <p class="text-gray-300 text-lg font-semibold">Демо-видео скоро</p>
+        <p class="text-gray-600 text-sm mt-2">Посмотри как FatBotSlim работает в реальном Telegram-чате</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section id="pricing" class="py-24 px-4">
+    <div class="max-w-4xl mx-auto text-center">
+      <h2 class="text-4xl md:text-5xl font-black mb-4">
+        Простые <span class="gradient-text">цены</span>
+      </h2>
+      <p class="text-gray-400 mb-16">Начни бесплатно. Переходи на Premium когда будешь готов.</p>
+
+      <div class="grid md:grid-cols-2 gap-6 max-w-2xl mx-auto text-left">
+        <!-- Free -->
+        <div class="border border-[#2a2a2a] rounded-3xl p-8">
+          <div class="text-base font-semibold text-gray-400 mb-1">Free</div>
+          <div class="text-5xl font-black mb-1">€0</div>
+          <div class="text-gray-600 text-sm mb-8">навсегда</div>
+          <ul class="space-y-3 text-sm text-gray-400 mb-8">
+            <li class="flex gap-3 items-center"><span class="text-accent font-bold">✓</span> До 10 записей в день</li>
+            <li class="flex gap-3 items-center"><span class="text-accent font-bold">✓</span> Распознавание текста</li>
+            <li class="flex gap-3 items-center"><span class="text-accent font-bold">✓</span> Итоги дня</li>
+            <li class="flex gap-3 items-center"><span class="text-gray-600">✗</span> <span class="text-gray-600">Фото-анализ блюд</span></li>
+            <li class="flex gap-3 items-center"><span class="text-gray-600">✗</span> <span class="text-gray-600">История за 30 дней</span></li>
+            <li class="flex gap-3 items-center"><span class="text-gray-600">✗</span> <span class="text-gray-600">График прогресса</span></li>
+          </ul>
+          <a href="https://t.me/n8nfit_bot" target="_blank"
+             class="block border border-white/20 hover:border-white/40 text-white font-semibold py-3.5 rounded-xl text-center transition text-sm">
+            Начать бесплатно
+          </a>
+        </div>
+
+        <!-- Premium -->
+        <div class="border border-accent/40 bg-accent/5 rounded-3xl p-8 relative overflow-hidden">
+          <div class="absolute top-5 right-5 bg-accent text-black text-xs font-bold px-3 py-1 rounded-full">Популярный</div>
+          <div class="text-base font-semibold text-accent mb-1">Premium</div>
+          <div class="text-5xl font-black mb-1">€10</div>
+          <div class="text-gray-600 text-sm mb-8">в месяц</div>
+          <ul class="space-y-3 text-sm mb-8">
+            <li class="flex gap-3 items-center"><span class="text-accent font-bold">✓</span> Безлимитные записи</li>
+            <li class="flex gap-3 items-center"><span class="text-accent font-bold">✓</span> Распознавание текста</li>
+            <li class="flex gap-3 items-center"><span class="text-accent font-bold">✓</span> <strong>Фото-анализ блюд</strong></li>
+            <li class="flex gap-3 items-center"><span class="text-accent font-bold">✓</span> История за 30 дней</li>
+            <li class="flex gap-3 items-center"><span class="text-accent font-bold">✓</span> <strong>График прогресса</strong></li>
+            <li class="flex gap-3 items-center"><span class="text-accent font-bold">✓</span> Приоритетная поддержка</li>
+          </ul>
+          <a href="https://t.me/n8nfit_bot" target="_blank"
+             class="block bg-accent hover:bg-accent-dark text-black font-bold py-3.5 rounded-xl text-center transition btn-glow text-sm">
+            Получить Premium
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" class="py-24 px-4 bg-[#1a1a1a]/40">
+    <div class="max-w-3xl mx-auto">
+      <h2 class="text-4xl font-black text-center mb-16">
+        Частые <span class="gradient-text">вопросы</span>
+      </h2>
+      <div class="space-y-3">
+        <details class="border border-[#2a2a2a] rounded-2xl p-6 cursor-pointer">
+          <summary class="font-semibold flex justify-between items-center list-none">
+            Нужно ли устанавливать приложение?
+            <span class="plus text-accent text-xl leading-none">+</span>
+          </summary>
+          <p class="text-gray-400 text-sm mt-4 leading-relaxed">Нет. FatBotSlim работает через обычный Telegram — не нужно ничего устанавливать дополнительно. Открой бота и начни писать. Работает на iOS, Android, Mac и Windows.</p>
+        </details>
+        <details class="border border-[#2a2a2a] rounded-2xl p-6 cursor-pointer">
+          <summary class="font-semibold flex justify-between items-center list-none">
+            Насколько точно AI определяет калории?
+            <span class="plus text-accent text-xl leading-none">+</span>
+          </summary>
+          <p class="text-gray-400 text-sm mt-4 leading-relaxed">AI даёт приближённую оценку на основе стандартных порций и состава блюд. Для домашней еды точность около 85–90%. Если нужна точность — можно скорректировать граммовку прямо в чате.</p>
+        </details>
+        <details class="border border-[#2a2a2a] rounded-2xl p-6 cursor-pointer">
+          <summary class="font-semibold flex justify-between items-center list-none">
+            Мои данные в безопасности?
+            <span class="plus text-accent text-xl leading-none">+</span>
+          </summary>
+          <p class="text-gray-400 text-sm mt-4 leading-relaxed">Все данные хранятся в защищённой облачной базе данных. Мы не продаём и не передаём твои данные третьим лицам. История питания привязана к твоему Telegram ID.</p>
+        </details>
+        <details class="border border-[#2a2a2a] rounded-2xl p-6 cursor-pointer">
+          <summary class="font-semibold flex justify-between items-center list-none">
+            Можно писать на русском и английском?
+            <span class="plus text-accent text-xl leading-none">+</span>
+          </summary>
+          <p class="text-gray-400 text-sm mt-4 leading-relaxed">Да, бот понимает оба языка. При первом запуске выбираешь язык интерфейса (RU/EN), но названия блюд можно писать на любом — бот поймёт.</p>
+        </details>
+        <details class="border border-[#2a2a2a] rounded-2xl p-6 cursor-pointer">
+          <summary class="font-semibold flex justify-between items-center list-none">
+            Как отменить Premium подписку?
+            <span class="plus text-accent text-xl leading-none">+</span>
+          </summary>
+          <p class="text-gray-400 text-sm mt-4 leading-relaxed">Отменить можно в любой момент через команду /pay в боте. Доступ сохраняется до конца оплаченного периода — деньги не сгорают.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section class="py-24 px-4 text-center">
+    <div class="max-w-3xl mx-auto hero-gradient">
+      <div class="text-7xl mb-6 float">🥑</div>
+      <h2 class="text-4xl md:text-6xl font-black mb-6">
+        Начни считать<br><span class="gradient-text">прямо сейчас</span>
+      </h2>
+      <p class="text-gray-400 text-xl mb-10 max-w-xl mx-auto">Открой бота и запиши первый приём пищи — это займёт 10 секунд.</p>
+      <a href="https://t.me/n8nfit_bot" target="_blank"
+         class="inline-flex items-center gap-3 bg-accent hover:bg-accent-dark text-black font-bold text-xl px-10 py-5 rounded-2xl transition btn-glow">
+        <span>✈️</span> Открыть FatBotSlim
+      </a>
+      <p class="text-gray-600 text-sm mt-6">Бесплатно · Без регистрации · Только Telegram</p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="border-t border-[#2a2a2a] py-12 px-4">
+    <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
+      <div class="flex items-center gap-2">
+        <span class="text-2xl">🥑</span>
+        <span class="font-bold">FatBotSlim</span>
+        <span class="text-gray-600 text-sm ml-2">© 2026</span>
+      </div>
+      <div class="text-gray-600 text-sm text-center">
+        AI счётчик калорий и КБЖУ в Telegram
+      </div>
+      <div class="flex items-center gap-6 text-sm text-gray-500">
+        <a href="https://t.me/n8nfit_bot" target="_blank" class="hover:text-white transition">@n8nfit_bot</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
