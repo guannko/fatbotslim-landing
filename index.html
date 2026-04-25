@@ -1,19 +1,19 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>FatBotSlim — AI счётчик калорий в Telegram</title>
-  <meta name="description" content="FatBotSlim — умный Telegram-бот для подсчёта калорий и трекинга питания на основе AI. Просто напишите что съели или пришлите фото — бот всё посчитает.">
-  <meta name="keywords" content="счётчик калорий телеграм, AI трекер питания, калории бот, fitbot, fatbotslim, похудение телеграм, трекер еды, подсчёт калорий, КБЖУ">
-  <meta property="og:title" content="FatBotSlim — AI счётчик калорий в Telegram">
-  <meta property="og:description" content="Умный Telegram-бот для подсчёта калорий. Напишите что съели или пришлите фото — AI посчитает КБЖУ мгновенно.">
+  <title>FatBotSlim — AI Calorie Counter in Telegram</title>
+  <meta name="description" content="FatBotSlim — smart Telegram bot for calorie tracking powered by AI. Just type what you ate or send a photo — the bot counts everything instantly.">
+  <meta name="keywords" content="calorie counter telegram, AI nutrition tracker, calorie bot, fatbotslim, weight loss telegram, food tracker, macros bot, КБЖУ, счётчик калорий телеграм">
+  <meta property="og:title" content="FatBotSlim — AI Calorie Counter in Telegram">
+  <meta property="og:description" content="Smart Telegram bot for calorie tracking. Type what you ate or send a photo — AI calculates macros instantly.">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://fatbotslim.vercel.app">
+  <meta property="og:url" content="https://fatbotslim.fit">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="FatBotSlim — AI счётчик калорий в Telegram">
-  <meta name="twitter:description" content="Считай КБЖУ через Telegram. Текст или фото — AI всё посчитает.">
-  <link rel="canonical" href="https://fatbotslim.vercel.app">
+  <meta name="twitter:title" content="FatBotSlim — AI Calorie Counter in Telegram">
+  <meta name="twitter:description" content="Track macros via Telegram. Text or photo — AI does the math.">
+  <link rel="canonical" href="https://fatbotslim.fit">
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -22,13 +22,8 @@
           colors: {
             accent: '#22c55e',
             'accent-dark': '#16a34a',
-            dark: '#0d0d0d',
-            'dark-card': '#1a1a1a',
-            'dark-border': '#2a2a2a',
           },
-          fontFamily: {
-            sans: ['Inter', 'system-ui', 'sans-serif'],
-          }
+          fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] }
         }
       }
     }
@@ -36,10 +31,10 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <style>
-    body { background-color: #0d0d0d; color: #ffffff; }
+    body { background-color: #0d0d0d; color: #fff; }
     .gradient-text { background: linear-gradient(135deg, #22c55e, #84cc16); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-    .hero-gradient { background: radial-gradient(ellipse 80% 60% at 50% -10%, rgba(34,197,94,0.15), transparent); }
-    .card-gradient { background: linear-gradient(135deg, rgba(34,197,94,0.05), transparent); }
+    .hero-bg { background: radial-gradient(ellipse 80% 60% at 50% -10%, rgba(34,197,94,0.15), transparent); }
+    .card-bg { background: linear-gradient(135deg, rgba(34,197,94,0.05), transparent); }
     .btn-glow { box-shadow: 0 0 30px rgba(34,197,94,0.4); }
     .btn-glow:hover { box-shadow: 0 0 50px rgba(34,197,94,0.6); }
     @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
@@ -47,6 +42,8 @@
     details summary::-webkit-details-marker { display: none; }
     .plus { transition: transform 0.2s; display: inline-block; }
     details[open] .plus { transform: rotate(45deg); }
+    .lang-btn { transition: all 0.15s; }
+    .lang-btn.active { background: #22c55e; color: #000; }
   </style>
 </head>
 <body class="font-sans antialiased">
@@ -59,42 +56,48 @@
         <span class="font-bold text-lg tracking-tight">FatBotSlim</span>
       </div>
       <div class="hidden md:flex items-center gap-8 text-sm text-gray-400">
-        <a href="#features" class="hover:text-white transition">Возможности</a>
-        <a href="#how" class="hover:text-white transition">Как работает</a>
-        <a href="#pricing" class="hover:text-white transition">Цены</a>
+        <a href="#features" class="hover:text-white transition" data-i18n="nav_features">Features</a>
+        <a href="#how" class="hover:text-white transition" data-i18n="nav_how">How it works</a>
+        <a href="#pricing" class="hover:text-white transition" data-i18n="nav_pricing">Pricing</a>
         <a href="#faq" class="hover:text-white transition">FAQ</a>
       </div>
-      <a href="https://t.me/n8nfit_bot" target="_blank"
-         class="bg-accent hover:bg-accent-dark text-black font-semibold text-sm px-5 py-2.5 rounded-full transition btn-glow">
-        Попробовать бесплатно
-      </a>
+      <div class="flex items-center gap-3">
+        <!-- Language switcher -->
+        <div class="flex items-center bg-white/5 rounded-full p-1 text-xs font-semibold gap-1">
+          <button onclick="setLang('en')" id="btn-en" class="lang-btn active px-3 py-1 rounded-full">EN</button>
+          <button onclick="setLang('ru')" id="btn-ru" class="lang-btn px-3 py-1 rounded-full text-gray-400">RU</button>
+        </div>
+        <a href="https://t.me/n8nfit_bot" target="_blank"
+           class="bg-accent hover:bg-accent-dark text-black font-semibold text-sm px-5 py-2.5 rounded-full transition btn-glow"
+           data-i18n="nav_cta">Try for free</a>
+      </div>
     </div>
   </nav>
 
   <!-- HERO -->
-  <section class="hero-gradient min-h-screen flex flex-col items-center justify-center text-center px-4 pt-24 pb-16">
+  <section class="hero-bg min-h-screen flex flex-col items-center justify-center text-center px-4 pt-24 pb-16">
     <div class="inline-flex items-center gap-2 bg-accent/10 border border-accent/20 rounded-full px-4 py-2 text-sm text-accent mb-8">
       <span class="w-2 h-2 bg-accent rounded-full animate-pulse"></span>
-      AI-трекер питания в Telegram
+      <span data-i18n="hero_badge">AI nutrition tracker in Telegram</span>
     </div>
 
     <h1 class="text-5xl md:text-7xl font-black leading-tight mb-6 max-w-4xl">
-      Считай калории<br>
-      <span class="gradient-text">без таблиц и приложений</span>
+      <span data-i18n="hero_h1_1">Count calories</span><br>
+      <span class="gradient-text" data-i18n="hero_h1_2">without apps or spreadsheets</span>
     </h1>
 
-    <p class="text-xl text-gray-400 max-w-2xl mb-10 leading-relaxed">
-      Просто напиши что съел или пришли фото блюда — FatBotSlim мгновенно посчитает калории, белки, жиры и углеводы. Никакого поиска по базам и лишних приложений — всё прямо в Telegram.
+    <p class="text-xl text-gray-400 max-w-2xl mb-10 leading-relaxed" data-i18n="hero_desc">
+      Just type what you ate or send a photo — FatBotSlim instantly calculates calories, protein, fat and carbs. No database searching, no extra apps — all right in Telegram.
     </p>
 
     <div class="flex flex-col sm:flex-row gap-4 justify-center mb-16">
       <a href="https://t.me/n8nfit_bot" target="_blank"
          class="bg-accent hover:bg-accent-dark text-black font-bold text-lg px-8 py-4 rounded-2xl transition btn-glow flex items-center justify-center gap-3">
-        <span>✈️</span> Открыть в Telegram
+        <span>✈️</span> <span data-i18n="hero_cta_main">Open in Telegram</span>
       </a>
       <a href="#how"
          class="border border-white/10 hover:border-white/30 text-white font-semibold text-lg px-8 py-4 rounded-2xl transition flex items-center justify-center gap-3">
-        Как это работает <span>↓</span>
+        <span data-i18n="hero_cta_sec">How it works</span> <span>↓</span>
       </a>
     </div>
 
@@ -109,46 +112,46 @@
       </div>
       <div class="space-y-3 text-sm">
         <div class="flex justify-end">
-          <div class="bg-accent/20 text-white rounded-2xl rounded-tr-sm px-4 py-2.5">
-            Гречка с курицей 200г
+          <div class="bg-accent/20 text-white rounded-2xl rounded-tr-sm px-4 py-2.5" data-i18n="mock_msg1">
+            Chicken with rice 200g
           </div>
         </div>
         <div class="flex justify-start">
           <div class="bg-[#2a2a2a] rounded-2xl rounded-tl-sm px-4 py-3 max-w-xs">
-            <div class="font-semibold text-accent mb-1">✅ Записано!</div>
-            <div class="text-gray-300 text-sm">Гречка с курицей (200г)</div>
+            <div class="font-semibold text-accent mb-1" data-i18n="mock_saved">✅ Logged!</div>
+            <div class="text-gray-300 text-sm" data-i18n="mock_dish">Chicken with rice (200g)</div>
             <div class="mt-2 grid grid-cols-2 gap-x-4 gap-y-1 text-xs text-gray-400">
-              <span>🔥 <span class="text-white font-medium">284 ккал</span></span>
-              <span>💪 Б: <span class="text-white font-medium">28г</span></span>
-              <span>🧈 Ж: <span class="text-white font-medium">6г</span></span>
-              <span>🌾 У: <span class="text-white font-medium">32г</span></span>
+              <span>🔥 <span class="text-white font-medium">284 kcal</span></span>
+              <span>💪 P: <span class="text-white font-medium">28g</span></span>
+              <span>🧈 F: <span class="text-white font-medium">6g</span></span>
+              <span>🌾 C: <span class="text-white font-medium">32g</span></span>
             </div>
           </div>
         </div>
         <div class="flex justify-end">
-          <div class="bg-accent/20 text-white rounded-2xl rounded-tr-sm px-4 py-2.5">
-            📅 Итоги дня
+          <div class="bg-accent/20 text-white rounded-2xl rounded-tr-sm px-4 py-2.5" data-i18n="mock_msg2">
+            📅 Daily summary
           </div>
         </div>
         <div class="flex justify-start">
           <div class="bg-[#2a2a2a] rounded-2xl rounded-tl-sm px-4 py-3 w-full max-w-xs">
-            <div class="font-semibold mb-2 text-sm">📊 Сегодня</div>
+            <div class="font-semibold mb-2 text-sm" data-i18n="mock_today">📊 Today</div>
             <div class="text-xs text-gray-400 space-y-2">
               <div class="flex justify-between">
-                <span>🔥 Калории</span>
-                <span class="text-white font-medium">1 840 / 2 200 ккал</span>
+                <span data-i18n="mock_calories">🔥 Calories</span>
+                <span class="text-white font-medium">1 840 / 2 200 kcal</span>
               </div>
               <div class="w-full bg-[#0d0d0d] rounded-full h-1.5">
                 <div class="bg-accent h-1.5 rounded-full" style="width:83%"></div>
               </div>
-              <div class="text-right text-accent text-xs">83% от нормы</div>
+              <div class="text-right text-accent text-xs" data-i18n="mock_pct">83% of goal</div>
             </div>
           </div>
         </div>
       </div>
     </div>
 
-    <p class="mt-8 text-sm text-gray-600">Бесплатно · Не нужно устанавливать приложение · Работает сразу</p>
+    <p class="mt-8 text-sm text-gray-600" data-i18n="hero_footnote">Free · No app install needed · Works instantly</p>
   </section>
 
   <!-- STATS -->
@@ -156,19 +159,19 @@
     <div class="max-w-4xl mx-auto px-4 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
       <div>
         <div class="text-4xl font-black gradient-text">AI</div>
-        <div class="text-gray-500 text-sm mt-1">распознавание блюд</div>
+        <div class="text-gray-500 text-sm mt-1" data-i18n="stat1">food recognition</div>
       </div>
       <div>
-        <div class="text-4xl font-black gradient-text">КБЖУ</div>
-        <div class="text-gray-500 text-sm mt-1">мгновенно</div>
+        <div class="text-4xl font-black gradient-text" data-i18n="stat2_val">Macros</div>
+        <div class="text-gray-500 text-sm mt-1" data-i18n="stat2">instantly</div>
       </div>
       <div>
         <div class="text-4xl font-black gradient-text">24/7</div>
-        <div class="text-gray-500 text-sm mt-1">работает всегда</div>
+        <div class="text-gray-500 text-sm mt-1" data-i18n="stat3">always on</div>
       </div>
       <div>
         <div class="text-4xl font-black gradient-text">€10</div>
-        <div class="text-gray-500 text-sm mt-1">в месяц за Premium</div>
+        <div class="text-gray-500 text-sm mt-1" data-i18n="stat4">per month Premium</div>
       </div>
     </div>
   </section>
@@ -177,40 +180,41 @@
   <section id="features" class="py-24 px-4">
     <div class="max-w-6xl mx-auto">
       <h2 class="text-4xl md:text-5xl font-black text-center mb-4">
-        Всё что нужно для<br><span class="gradient-text">контроля питания</span>
+        <span data-i18n="feat_title1">Everything you need for</span><br>
+        <span class="gradient-text" data-i18n="feat_title2">nutrition control</span>
       </h2>
-      <p class="text-gray-400 text-center mb-16 max-w-2xl mx-auto">Никаких сложных приложений. Просто Telegram, в котором ты уже сидишь.</p>
+      <p class="text-gray-400 text-center mb-16 max-w-2xl mx-auto" data-i18n="feat_sub">No complex apps. Just Telegram — the one you already use.</p>
 
       <div class="grid md:grid-cols-3 gap-6">
-        <div class="card-gradient border border-[#2a2a2a] rounded-3xl p-6 hover:border-accent/30 transition">
+        <div class="card-bg border border-[#2a2a2a] rounded-3xl p-6 hover:border-accent/30 transition">
           <div class="text-4xl mb-4">📸</div>
-          <h3 class="text-xl font-bold mb-2">Фото → Калории</h3>
-          <p class="text-gray-400 text-sm leading-relaxed">Сфотографируй блюдо и отправь боту. AI распознает еду и посчитает КБЖУ автоматически — никакого ручного поиска.</p>
+          <h3 class="text-xl font-bold mb-2" data-i18n="f1_title">Photo → Calories</h3>
+          <p class="text-gray-400 text-sm leading-relaxed" data-i18n="f1_desc">Take a photo of your meal and send it. AI recognizes the food and calculates macros — no manual searching required.</p>
         </div>
-        <div class="card-gradient border border-[#2a2a2a] rounded-3xl p-6 hover:border-accent/30 transition">
+        <div class="card-bg border border-[#2a2a2a] rounded-3xl p-6 hover:border-accent/30 transition">
           <div class="text-4xl mb-4">💬</div>
-          <h3 class="text-xl font-bold mb-2">Текст → Калории</h3>
-          <p class="text-gray-400 text-sm leading-relaxed">Напиши «борщ 300г» или «2 яйца с тостом» — бот поймёт и запишет. Работает на русском и английском.</p>
+          <h3 class="text-xl font-bold mb-2" data-i18n="f2_title">Text → Calories</h3>
+          <p class="text-gray-400 text-sm leading-relaxed" data-i18n="f2_desc">Type "chicken rice 200g" or "2 eggs with toast" — the bot understands and logs it. Works in English and Russian.</p>
         </div>
-        <div class="card-gradient border border-[#2a2a2a] rounded-3xl p-6 hover:border-accent/30 transition">
+        <div class="card-bg border border-[#2a2a2a] rounded-3xl p-6 hover:border-accent/30 transition">
           <div class="text-4xl mb-4">📊</div>
-          <h3 class="text-xl font-bold mb-2">Итоги дня</h3>
-          <p class="text-gray-400 text-sm leading-relaxed">В любой момент посмотри сколько ккал и нутриентов съел сегодня. С прогресс-баром относительно нормы.</p>
+          <h3 class="text-xl font-bold mb-2" data-i18n="f3_title">Daily Summary</h3>
+          <p class="text-gray-400 text-sm leading-relaxed" data-i18n="f3_desc">Check calories and macros at any time. With a progress bar against your daily goal — always know where you stand.</p>
         </div>
-        <div class="card-gradient border border-[#2a2a2a] rounded-3xl p-6 hover:border-accent/30 transition">
+        <div class="card-bg border border-[#2a2a2a] rounded-3xl p-6 hover:border-accent/30 transition">
           <div class="text-4xl mb-4">📈</div>
-          <h3 class="text-xl font-bold mb-2">График прогресса</h3>
-          <p class="text-gray-400 text-sm leading-relaxed">Смотри тренды за 7 и 30 дней. Следи за динамикой питания без экспорта данных и лишних экранов.</p>
+          <h3 class="text-xl font-bold mb-2" data-i18n="f4_title">Progress Chart</h3>
+          <p class="text-gray-400 text-sm leading-relaxed" data-i18n="f4_desc">View trends over 7 and 30 days. Track your nutrition dynamics without exporting data or switching apps.</p>
         </div>
-        <div class="card-gradient border border-[#2a2a2a] rounded-3xl p-6 hover:border-accent/30 transition">
+        <div class="card-bg border border-[#2a2a2a] rounded-3xl p-6 hover:border-accent/30 transition">
           <div class="text-4xl mb-4">🎯</div>
-          <h3 class="text-xl font-bold mb-2">Личные цели</h3>
-          <p class="text-gray-400 text-sm leading-relaxed">Установи свою норму калорий. Бот всегда покажет сколько ещё можно съесть до конца дня.</p>
+          <h3 class="text-xl font-bold mb-2" data-i18n="f5_title">Personal Goals</h3>
+          <p class="text-gray-400 text-sm leading-relaxed" data-i18n="f5_desc">Set your daily calorie target. The bot always shows how much more you can eat before hitting your limit.</p>
         </div>
-        <div class="card-gradient border border-[#2a2a2a] rounded-3xl p-6 hover:border-accent/30 transition">
+        <div class="card-bg border border-[#2a2a2a] rounded-3xl p-6 hover:border-accent/30 transition">
           <div class="text-4xl mb-4">✏️</div>
-          <h3 class="text-xl font-bold mb-2">Редактирование</h3>
-          <p class="text-gray-400 text-sm leading-relaxed">Ошибся с граммовкой? Бот позволит скорректировать любую запись прямо в чате без перезапуска.</p>
+          <h3 class="text-xl font-bold mb-2" data-i18n="f6_title">Edit Entries</h3>
+          <p class="text-gray-400 text-sm leading-relaxed" data-i18n="f6_desc">Wrong weight? Fix any log entry right in the chat — no need to delete and start over.</p>
         </div>
       </div>
     </div>
@@ -220,31 +224,26 @@
   <section id="how" class="py-24 px-4 bg-[#1a1a1a]/40">
     <div class="max-w-4xl mx-auto text-center">
       <h2 class="text-4xl md:text-5xl font-black mb-4">
-        Три шага<br><span class="gradient-text">до результата</span>
+        <span data-i18n="how_title1">Three steps</span><br>
+        <span class="gradient-text" data-i18n="how_title2">to results</span>
       </h2>
-      <p class="text-gray-400 mb-16 max-w-xl mx-auto">Настройка занимает 30 секунд. Дальше — просто пиши что ешь.</p>
+      <p class="text-gray-400 mb-16 max-w-xl mx-auto" data-i18n="how_sub">Setup takes 30 seconds. Then just log what you eat.</p>
 
       <div class="grid md:grid-cols-3 gap-12">
         <div class="flex flex-col items-center">
-          <div class="w-16 h-16 rounded-2xl bg-accent/10 border border-accent/30 flex items-center justify-center text-2xl font-black text-accent mb-5">
-            1
-          </div>
-          <h3 class="font-bold text-lg mb-2">Открой бота</h3>
-          <p class="text-gray-400 text-sm leading-relaxed">Нажми Start в @n8nfit_bot и выбери язык интерфейса. Займёт 10 секунд.</p>
+          <div class="w-16 h-16 rounded-2xl bg-accent/10 border border-accent/30 flex items-center justify-center text-2xl font-black text-accent mb-5">1</div>
+          <h3 class="font-bold text-lg mb-2" data-i18n="step1_title">Open the bot</h3>
+          <p class="text-gray-400 text-sm leading-relaxed" data-i18n="step1_desc">Press Start in @n8nfit_bot and choose your interface language. Takes 10 seconds.</p>
         </div>
         <div class="flex flex-col items-center">
-          <div class="w-16 h-16 rounded-2xl bg-accent/10 border border-accent/30 flex items-center justify-center text-2xl font-black text-accent mb-5">
-            2
-          </div>
-          <h3 class="font-bold text-lg mb-2">Укажи норму</h3>
-          <p class="text-gray-400 text-sm leading-relaxed">Установи свою дневную норму калорий. Бот будет ориентироваться на неё при подсчёте.</p>
+          <div class="w-16 h-16 rounded-2xl bg-accent/10 border border-accent/30 flex items-center justify-center text-2xl font-black text-accent mb-5">2</div>
+          <h3 class="font-bold text-lg mb-2" data-i18n="step2_title">Set your goal</h3>
+          <p class="text-gray-400 text-sm leading-relaxed" data-i18n="step2_desc">Enter your daily calorie target. The bot will track every meal against it.</p>
         </div>
         <div class="flex flex-col items-center">
-          <div class="w-16 h-16 rounded-2xl bg-accent/10 border border-accent/30 flex items-center justify-center text-2xl font-black text-accent mb-5">
-            3
-          </div>
-          <h3 class="font-bold text-lg mb-2">Отправляй еду</h3>
-          <p class="text-gray-400 text-sm leading-relaxed">Текст или фото — бот считает и записывает КБЖУ. Смотри итоги в любое время.</p>
+          <div class="w-16 h-16 rounded-2xl bg-accent/10 border border-accent/30 flex items-center justify-center text-2xl font-black text-accent mb-5">3</div>
+          <h3 class="font-bold text-lg mb-2" data-i18n="step3_title">Log your food</h3>
+          <p class="text-gray-400 text-sm leading-relaxed" data-i18n="step3_desc">Text or photo — the bot counts and records macros. Check your summary anytime.</p>
         </div>
       </div>
     </div>
@@ -255,8 +254,8 @@
     <div class="max-w-3xl mx-auto">
       <div class="bg-[#1a1a1a] border border-[#2a2a2a] rounded-3xl aspect-video flex flex-col items-center justify-center text-center p-8">
         <div class="text-6xl mb-4">▶️</div>
-        <p class="text-gray-300 text-lg font-semibold">Демо-видео скоро</p>
-        <p class="text-gray-600 text-sm mt-2">Посмотри как FatBotSlim работает в реальном Telegram-чате</p>
+        <p class="text-gray-300 text-lg font-semibold" data-i18n="video_title">Demo video coming soon</p>
+        <p class="text-gray-600 text-sm mt-2" data-i18n="video_sub">See FatBotSlim in action inside a real Telegram chat</p>
       </div>
     </div>
   </section>
@@ -265,48 +264,44 @@
   <section id="pricing" class="py-24 px-4">
     <div class="max-w-4xl mx-auto text-center">
       <h2 class="text-4xl md:text-5xl font-black mb-4">
-        Простые <span class="gradient-text">цены</span>
+        <span data-i18n="price_title1">Simple</span> <span class="gradient-text" data-i18n="price_title2">pricing</span>
       </h2>
-      <p class="text-gray-400 mb-16">Начни бесплатно. Переходи на Premium когда будешь готов.</p>
+      <p class="text-gray-400 mb-16" data-i18n="price_sub">Start free. Upgrade to Premium when you're ready.</p>
 
       <div class="grid md:grid-cols-2 gap-6 max-w-2xl mx-auto text-left">
-        <!-- Free -->
         <div class="border border-[#2a2a2a] rounded-3xl p-8">
           <div class="text-base font-semibold text-gray-400 mb-1">Free</div>
           <div class="text-5xl font-black mb-1">€0</div>
-          <div class="text-gray-600 text-sm mb-8">навсегда</div>
+          <div class="text-gray-600 text-sm mb-8" data-i18n="free_period">forever</div>
           <ul class="space-y-3 text-sm text-gray-400 mb-8">
-            <li class="flex gap-3 items-center"><span class="text-accent font-bold">✓</span> До 10 записей в день</li>
-            <li class="flex gap-3 items-center"><span class="text-accent font-bold">✓</span> Распознавание текста</li>
-            <li class="flex gap-3 items-center"><span class="text-accent font-bold">✓</span> Итоги дня</li>
-            <li class="flex gap-3 items-center"><span class="text-gray-600">✗</span> <span class="text-gray-600">Фото-анализ блюд</span></li>
-            <li class="flex gap-3 items-center"><span class="text-gray-600">✗</span> <span class="text-gray-600">История за 30 дней</span></li>
-            <li class="flex gap-3 items-center"><span class="text-gray-600">✗</span> <span class="text-gray-600">График прогресса</span></li>
+            <li class="flex gap-3 items-center"><span class="text-accent font-bold">✓</span> <span data-i18n="free_f1">Up to 10 logs per day</span></li>
+            <li class="flex gap-3 items-center"><span class="text-accent font-bold">✓</span> <span data-i18n="free_f2">Text recognition</span></li>
+            <li class="flex gap-3 items-center"><span class="text-accent font-bold">✓</span> <span data-i18n="free_f3">Daily summary</span></li>
+            <li class="flex gap-3 items-center"><span class="text-gray-600">✗</span> <span class="text-gray-600" data-i18n="free_f4">Photo analysis</span></li>
+            <li class="flex gap-3 items-center"><span class="text-gray-600">✗</span> <span class="text-gray-600" data-i18n="free_f5">30-day history</span></li>
+            <li class="flex gap-3 items-center"><span class="text-gray-600">✗</span> <span class="text-gray-600" data-i18n="free_f6">Progress chart</span></li>
           </ul>
           <a href="https://t.me/n8nfit_bot" target="_blank"
-             class="block border border-white/20 hover:border-white/40 text-white font-semibold py-3.5 rounded-xl text-center transition text-sm">
-            Начать бесплатно
-          </a>
+             class="block border border-white/20 hover:border-white/40 text-white font-semibold py-3.5 rounded-xl text-center transition text-sm"
+             data-i18n="free_btn">Start for free</a>
         </div>
 
-        <!-- Premium -->
         <div class="border border-accent/40 bg-accent/5 rounded-3xl p-8 relative overflow-hidden">
-          <div class="absolute top-5 right-5 bg-accent text-black text-xs font-bold px-3 py-1 rounded-full">Популярный</div>
+          <div class="absolute top-5 right-5 bg-accent text-black text-xs font-bold px-3 py-1 rounded-full" data-i18n="premium_badge">Popular</div>
           <div class="text-base font-semibold text-accent mb-1">Premium</div>
           <div class="text-5xl font-black mb-1">€10</div>
-          <div class="text-gray-600 text-sm mb-8">в месяц</div>
+          <div class="text-gray-600 text-sm mb-8" data-i18n="premium_period">per month</div>
           <ul class="space-y-3 text-sm mb-8">
-            <li class="flex gap-3 items-center"><span class="text-accent font-bold">✓</span> Безлимитные записи</li>
-            <li class="flex gap-3 items-center"><span class="text-accent font-bold">✓</span> Распознавание текста</li>
-            <li class="flex gap-3 items-center"><span class="text-accent font-bold">✓</span> <strong>Фото-анализ блюд</strong></li>
-            <li class="flex gap-3 items-center"><span class="text-accent font-bold">✓</span> История за 30 дней</li>
-            <li class="flex gap-3 items-center"><span class="text-accent font-bold">✓</span> <strong>График прогресса</strong></li>
-            <li class="flex gap-3 items-center"><span class="text-accent font-bold">✓</span> Приоритетная поддержка</li>
+            <li class="flex gap-3 items-center"><span class="text-accent font-bold">✓</span> <span data-i18n="prem_f1">Unlimited logs</span></li>
+            <li class="flex gap-3 items-center"><span class="text-accent font-bold">✓</span> <span data-i18n="prem_f2">Text recognition</span></li>
+            <li class="flex gap-3 items-center"><span class="text-accent font-bold">✓</span> <strong data-i18n="prem_f3">Photo analysis</strong></li>
+            <li class="flex gap-3 items-center"><span class="text-accent font-bold">✓</span> <span data-i18n="prem_f4">30-day history</span></li>
+            <li class="flex gap-3 items-center"><span class="text-accent font-bold">✓</span> <strong data-i18n="prem_f5">Progress chart</strong></li>
+            <li class="flex gap-3 items-center"><span class="text-accent font-bold">✓</span> <span data-i18n="prem_f6">Priority support</span></li>
           </ul>
           <a href="https://t.me/n8nfit_bot" target="_blank"
-             class="block bg-accent hover:bg-accent-dark text-black font-bold py-3.5 rounded-xl text-center transition btn-glow text-sm">
-            Получить Premium
-          </a>
+             class="block bg-accent hover:bg-accent-dark text-black font-bold py-3.5 rounded-xl text-center transition btn-glow text-sm"
+             data-i18n="prem_btn">Get Premium</a>
         </div>
       </div>
     </div>
@@ -316,43 +311,43 @@
   <section id="faq" class="py-24 px-4 bg-[#1a1a1a]/40">
     <div class="max-w-3xl mx-auto">
       <h2 class="text-4xl font-black text-center mb-16">
-        Частые <span class="gradient-text">вопросы</span>
+        <span data-i18n="faq_title1">Common</span> <span class="gradient-text" data-i18n="faq_title2">questions</span>
       </h2>
       <div class="space-y-3">
         <details class="border border-[#2a2a2a] rounded-2xl p-6 cursor-pointer">
           <summary class="font-semibold flex justify-between items-center list-none">
-            Нужно ли устанавливать приложение?
+            <span data-i18n="faq1_q">Do I need to install an app?</span>
             <span class="plus text-accent text-xl leading-none">+</span>
           </summary>
-          <p class="text-gray-400 text-sm mt-4 leading-relaxed">Нет. FatBotSlim работает через обычный Telegram — не нужно ничего устанавливать дополнительно. Открой бота и начни писать. Работает на iOS, Android, Mac и Windows.</p>
+          <p class="text-gray-400 text-sm mt-4 leading-relaxed" data-i18n="faq1_a">No. FatBotSlim works through regular Telegram — nothing extra to install. Just open the bot and start typing. Works on iOS, Android, Mac and Windows.</p>
         </details>
         <details class="border border-[#2a2a2a] rounded-2xl p-6 cursor-pointer">
           <summary class="font-semibold flex justify-between items-center list-none">
-            Насколько точно AI определяет калории?
+            <span data-i18n="faq2_q">How accurate is the AI calorie count?</span>
             <span class="plus text-accent text-xl leading-none">+</span>
           </summary>
-          <p class="text-gray-400 text-sm mt-4 leading-relaxed">AI даёт приближённую оценку на основе стандартных порций и состава блюд. Для домашней еды точность около 85–90%. Если нужна точность — можно скорректировать граммовку прямо в чате.</p>
+          <p class="text-gray-400 text-sm mt-4 leading-relaxed" data-i18n="faq2_a">AI gives an approximate estimate based on standard portions and composition. For home-cooked meals, accuracy is around 85–90%. You can always adjust the weight directly in the chat if needed.</p>
         </details>
         <details class="border border-[#2a2a2a] rounded-2xl p-6 cursor-pointer">
           <summary class="font-semibold flex justify-between items-center list-none">
-            Мои данные в безопасности?
+            <span data-i18n="faq3_q">Is my data safe?</span>
             <span class="plus text-accent text-xl leading-none">+</span>
           </summary>
-          <p class="text-gray-400 text-sm mt-4 leading-relaxed">Все данные хранятся в защищённой облачной базе данных. Мы не продаём и не передаём твои данные третьим лицам. История питания привязана к твоему Telegram ID.</p>
+          <p class="text-gray-400 text-sm mt-4 leading-relaxed" data-i18n="faq3_a">All data is stored in a secure cloud database. We never sell or share your data with third parties. Your food history is linked to your Telegram ID only.</p>
         </details>
         <details class="border border-[#2a2a2a] rounded-2xl p-6 cursor-pointer">
           <summary class="font-semibold flex justify-between items-center list-none">
-            Можно писать на русском и английском?
+            <span data-i18n="faq4_q">Can I write in both Russian and English?</span>
             <span class="plus text-accent text-xl leading-none">+</span>
           </summary>
-          <p class="text-gray-400 text-sm mt-4 leading-relaxed">Да, бот понимает оба языка. При первом запуске выбираешь язык интерфейса (RU/EN), но названия блюд можно писать на любом — бот поймёт.</p>
+          <p class="text-gray-400 text-sm mt-4 leading-relaxed" data-i18n="faq4_a">Yes, the bot understands both languages. You choose the interface language (EN/RU) on first launch, but you can type food names in any language — the bot will figure it out.</p>
         </details>
         <details class="border border-[#2a2a2a] rounded-2xl p-6 cursor-pointer">
           <summary class="font-semibold flex justify-between items-center list-none">
-            Как отменить Premium подписку?
+            <span data-i18n="faq5_q">How do I cancel my Premium subscription?</span>
             <span class="plus text-accent text-xl leading-none">+</span>
           </summary>
-          <p class="text-gray-400 text-sm mt-4 leading-relaxed">Отменить можно в любой момент через команду /pay в боте. Доступ сохраняется до конца оплаченного периода — деньги не сгорают.</p>
+          <p class="text-gray-400 text-sm mt-4 leading-relaxed" data-i18n="faq5_a">Cancel anytime via the /pay command in the bot. Your access continues until the end of the paid period — no money is lost.</p>
         </details>
       </div>
     </div>
@@ -360,17 +355,18 @@
 
   <!-- FINAL CTA -->
   <section class="py-24 px-4 text-center">
-    <div class="max-w-3xl mx-auto hero-gradient">
+    <div class="max-w-3xl mx-auto hero-bg">
       <div class="text-7xl mb-6 float">🥑</div>
       <h2 class="text-4xl md:text-6xl font-black mb-6">
-        Начни считать<br><span class="gradient-text">прямо сейчас</span>
+        <span data-i18n="cta_title1">Start counting</span><br>
+        <span class="gradient-text" data-i18n="cta_title2">right now</span>
       </h2>
-      <p class="text-gray-400 text-xl mb-10 max-w-xl mx-auto">Открой бота и запиши первый приём пищи — это займёт 10 секунд.</p>
+      <p class="text-gray-400 text-xl mb-10 max-w-xl mx-auto" data-i18n="cta_desc">Open the bot and log your first meal — it takes 10 seconds.</p>
       <a href="https://t.me/n8nfit_bot" target="_blank"
          class="inline-flex items-center gap-3 bg-accent hover:bg-accent-dark text-black font-bold text-xl px-10 py-5 rounded-2xl transition btn-glow">
-        <span>✈️</span> Открыть FatBotSlim
+        <span>✈️</span> <span data-i18n="cta_btn">Open FatBotSlim</span>
       </a>
-      <p class="text-gray-600 text-sm mt-6">Бесплатно · Без регистрации · Только Telegram</p>
+      <p class="text-gray-600 text-sm mt-6" data-i18n="cta_footnote">Free · No registration · Telegram only</p>
     </div>
   </section>
 
@@ -382,14 +378,119 @@
         <span class="font-bold">FatBotSlim</span>
         <span class="text-gray-600 text-sm ml-2">© 2026</span>
       </div>
-      <div class="text-gray-600 text-sm text-center">
-        AI счётчик калорий и КБЖУ в Telegram
-      </div>
+      <div class="text-gray-600 text-sm text-center" data-i18n="footer_desc">AI calorie & macros tracker in Telegram</div>
       <div class="flex items-center gap-6 text-sm text-gray-500">
         <a href="https://t.me/n8nfit_bot" target="_blank" class="hover:text-white transition">@n8nfit_bot</a>
       </div>
     </div>
   </footer>
+
+  <script>
+    const t = {
+      en: {
+        nav_features: 'Features', nav_how: 'How it works', nav_pricing: 'Pricing', nav_cta: 'Try for free',
+        hero_badge: 'AI nutrition tracker in Telegram',
+        hero_h1_1: 'Count calories', hero_h1_2: 'without apps or spreadsheets',
+        hero_desc: 'Just type what you ate or send a photo — FatBotSlim instantly calculates calories, protein, fat and carbs. No database searching, no extra apps — all right in Telegram.',
+        hero_cta_main: 'Open in Telegram', hero_cta_sec: 'How it works',
+        mock_msg1: 'Chicken with rice 200g', mock_saved: '✅ Logged!', mock_dish: 'Chicken with rice (200g)',
+        mock_msg2: '📅 Daily summary', mock_today: '📊 Today', mock_calories: '🔥 Calories', mock_pct: '83% of goal',
+        hero_footnote: 'Free · No app install needed · Works instantly',
+        stat1: 'food recognition', stat2_val: 'Macros', stat2: 'instantly', stat3: 'always on', stat4: 'per month Premium',
+        feat_title1: 'Everything you need for', feat_title2: 'nutrition control',
+        feat_sub: 'No complex apps. Just Telegram — the one you already use.',
+        f1_title: 'Photo → Calories', f1_desc: 'Take a photo of your meal and send it. AI recognizes the food and calculates macros — no manual searching required.',
+        f2_title: 'Text → Calories', f2_desc: 'Type "chicken rice 200g" or "2 eggs with toast" — the bot understands and logs it. Works in English and Russian.',
+        f3_title: 'Daily Summary', f3_desc: 'Check calories and macros at any time. With a progress bar against your daily goal — always know where you stand.',
+        f4_title: 'Progress Chart', f4_desc: 'View trends over 7 and 30 days. Track your nutrition dynamics without exporting data or switching apps.',
+        f5_title: 'Personal Goals', f5_desc: 'Set your daily calorie target. The bot always shows how much more you can eat before hitting your limit.',
+        f6_title: 'Edit Entries', f6_desc: 'Wrong weight? Fix any log entry right in the chat — no need to delete and start over.',
+        how_title1: 'Three steps', how_title2: 'to results',
+        how_sub: 'Setup takes 30 seconds. Then just log what you eat.',
+        step1_title: 'Open the bot', step1_desc: 'Press Start in @n8nfit_bot and choose your interface language. Takes 10 seconds.',
+        step2_title: 'Set your goal', step2_desc: 'Enter your daily calorie target. The bot will track every meal against it.',
+        step3_title: 'Log your food', step3_desc: 'Text or photo — the bot counts and records macros. Check your summary anytime.',
+        video_title: 'Demo video coming soon', video_sub: 'See FatBotSlim in action inside a real Telegram chat',
+        price_title1: 'Simple', price_title2: 'pricing', price_sub: 'Start free. Upgrade to Premium when you\'re ready.',
+        free_period: 'forever', free_f1: 'Up to 10 logs per day', free_f2: 'Text recognition', free_f3: 'Daily summary',
+        free_f4: 'Photo analysis', free_f5: '30-day history', free_f6: 'Progress chart', free_btn: 'Start for free',
+        premium_badge: 'Popular', premium_period: 'per month',
+        prem_f1: 'Unlimited logs', prem_f2: 'Text recognition', prem_f3: 'Photo analysis',
+        prem_f4: '30-day history', prem_f5: 'Progress chart', prem_f6: 'Priority support', prem_btn: 'Get Premium',
+        faq_title1: 'Common', faq_title2: 'questions',
+        faq1_q: 'Do I need to install an app?', faq1_a: 'No. FatBotSlim works through regular Telegram — nothing extra to install. Just open the bot and start typing. Works on iOS, Android, Mac and Windows.',
+        faq2_q: 'How accurate is the AI calorie count?', faq2_a: 'AI gives an approximate estimate based on standard portions and composition. For home-cooked meals, accuracy is around 85–90%. You can always adjust the weight directly in the chat.',
+        faq3_q: 'Is my data safe?', faq3_a: 'All data is stored in a secure cloud database. We never sell or share your data with third parties. Your food history is linked to your Telegram ID only.',
+        faq4_q: 'Can I write in both Russian and English?', faq4_a: 'Yes, the bot understands both languages. You choose the interface language (EN/RU) on first launch, but food names can be typed in any language.',
+        faq5_q: 'How do I cancel my Premium subscription?', faq5_a: 'Cancel anytime via the /pay command in the bot. Your access continues until the end of the paid period — no money is lost.',
+        cta_title1: 'Start counting', cta_title2: 'right now',
+        cta_desc: 'Open the bot and log your first meal — it takes 10 seconds.',
+        cta_btn: 'Open FatBotSlim', cta_footnote: 'Free · No registration · Telegram only',
+        footer_desc: 'AI calorie & macros tracker in Telegram',
+      },
+      ru: {
+        nav_features: 'Возможности', nav_how: 'Как работает', nav_pricing: 'Цены', nav_cta: 'Попробовать бесплатно',
+        hero_badge: 'AI-трекер питания в Telegram',
+        hero_h1_1: 'Считай калории', hero_h1_2: 'без таблиц и приложений',
+        hero_desc: 'Просто напиши что съел или пришли фото блюда — FatBotSlim мгновенно посчитает калории, белки, жиры и углеводы. Никакого поиска по базам и лишних приложений — всё прямо в Telegram.',
+        hero_cta_main: 'Открыть в Telegram', hero_cta_sec: 'Как это работает',
+        mock_msg1: 'Гречка с курицей 200г', mock_saved: '✅ Записано!', mock_dish: 'Гречка с курицей (200г)',
+        mock_msg2: '📅 Итоги дня', mock_today: '📊 Сегодня', mock_calories: '🔥 Калории', mock_pct: '83% от нормы',
+        hero_footnote: 'Бесплатно · Не нужно устанавливать приложение · Работает сразу',
+        stat1: 'распознавание блюд', stat2_val: 'КБЖУ', stat2: 'мгновенно', stat3: 'работает всегда', stat4: 'в месяц за Premium',
+        feat_title1: 'Всё что нужно для', feat_title2: 'контроля питания',
+        feat_sub: 'Никаких сложных приложений. Просто Telegram, в котором ты уже сидишь.',
+        f1_title: 'Фото → Калории', f1_desc: 'Сфотографируй блюдо и отправь боту. AI распознает еду и посчитает КБЖУ автоматически — никакого ручного поиска.',
+        f2_title: 'Текст → Калории', f2_desc: 'Напиши «борщ 300г» или «2 яйца с тостом» — бот поймёт и запишет. Работает на русском и английском.',
+        f3_title: 'Итоги дня', f3_desc: 'В любой момент посмотри сколько ккал и нутриентов съел сегодня. С прогресс-баром относительно твоей нормы.',
+        f4_title: 'График прогресса', f4_desc: 'Смотри тренды за 7 и 30 дней. Следи за динамикой питания без экспорта данных и лишних экранов.',
+        f5_title: 'Личные цели', f5_desc: 'Установи свою норму калорий. Бот всегда покажет сколько ещё можно съесть до конца дня.',
+        f6_title: 'Редактирование', f6_desc: 'Ошибся с граммовкой? Бот позволит скорректировать любую запись прямо в чате без перезапуска.',
+        how_title1: 'Три шага', how_title2: 'до результата',
+        how_sub: 'Настройка занимает 30 секунд. Дальше — просто пиши что ешь.',
+        step1_title: 'Открой бота', step1_desc: 'Нажми Start в @n8nfit_bot и выбери язык интерфейса. Займёт 10 секунд.',
+        step2_title: 'Укажи норму', step2_desc: 'Установи свою дневную норму калорий. Бот будет ориентироваться на неё.',
+        step3_title: 'Отправляй еду', step3_desc: 'Текст или фото — бот считает и записывает КБЖУ. Смотри итоги в любое время.',
+        video_title: 'Демо-видео скоро', video_sub: 'Посмотри как FatBotSlim работает в реальном Telegram-чате',
+        price_title1: 'Простые', price_title2: 'цены', price_sub: 'Начни бесплатно. Переходи на Premium когда будешь готов.',
+        free_period: 'навсегда', free_f1: 'До 10 записей в день', free_f2: 'Распознавание текста', free_f3: 'Итоги дня',
+        free_f4: 'Фото-анализ блюд', free_f5: 'История за 30 дней', free_f6: 'График прогресса', free_btn: 'Начать бесплатно',
+        premium_badge: 'Популярный', premium_period: 'в месяц',
+        prem_f1: 'Безлимитные записи', prem_f2: 'Распознавание текста', prem_f3: 'Фото-анализ блюд',
+        prem_f4: 'История за 30 дней', prem_f5: 'График прогресса', prem_f6: 'Приоритетная поддержка', prem_btn: 'Получить Premium',
+        faq_title1: 'Частые', faq_title2: 'вопросы',
+        faq1_q: 'Нужно ли устанавливать приложение?', faq1_a: 'Нет. FatBotSlim работает через обычный Telegram — не нужно ничего устанавливать дополнительно. Открой бота и начни писать. Работает на iOS, Android, Mac и Windows.',
+        faq2_q: 'Насколько точно AI определяет калории?', faq2_a: 'AI даёт приближённую оценку на основе стандартных порций и состава блюд. Для домашней еды точность около 85–90%. Можно скорректировать граммовку прямо в чате.',
+        faq3_q: 'Мои данные в безопасности?', faq3_a: 'Все данные хранятся в защищённой облачной базе данных. Мы не продаём и не передаём твои данные третьим лицам. История питания привязана к твоему Telegram ID.',
+        faq4_q: 'Можно писать на русском и английском?', faq4_a: 'Да, бот понимает оба языка. При первом запуске выбираешь язык интерфейса (RU/EN), но названия блюд можно писать на любом — бот поймёт.',
+        faq5_q: 'Как отменить Premium подписку?', faq5_a: 'Отменить можно в любой момент через команду /pay в боте. Доступ сохраняется до конца оплаченного периода — деньги не сгорают.',
+        cta_title1: 'Начни считать', cta_title2: 'прямо сейчас',
+        cta_desc: 'Открой бота и запиши первый приём пищи — это займёт 10 секунд.',
+        cta_btn: 'Открыть FatBotSlim', cta_footnote: 'Бесплатно · Без регистрации · Только Telegram',
+        footer_desc: 'AI счётчик калорий и КБЖУ в Telegram',
+      }
+    };
+
+    function setLang(lang) {
+      localStorage.setItem('fbs_lang', lang);
+      document.documentElement.lang = lang;
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (t[lang][key] !== undefined) el.textContent = t[lang][key];
+      });
+      document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+      document.getElementById('btn-en').classList.toggle('text-gray-400', lang !== 'en');
+      document.getElementById('btn-ru').classList.toggle('active', lang === 'ru');
+      document.getElementById('btn-ru').classList.toggle('text-gray-400', lang !== 'ru');
+      // Update page title and meta
+      document.title = lang === 'ru'
+        ? 'FatBotSlim — AI счётчик калорий в Telegram'
+        : 'FatBotSlim — AI Calorie Counter in Telegram';
+    }
+
+    // Init: default EN, override from localStorage
+    setLang(localStorage.getItem('fbs_lang') || 'en');
+  </script>
 
 </body>
 </html>
