@@ -44,6 +44,14 @@
     details[open] .plus { transform: rotate(45deg); }
     .lang-btn { transition: all 0.15s; }
     .lang-btn.active { background: #22c55e; color: #000; }
+    @keyframes msgIn{from{opacity:0;transform:translateY(8px) scale(0.97)}to{opacity:1;transform:translateY(0) scale(1)}}
+    .msg-in{animation:msgIn 0.3s cubic-bezier(0.34,1.56,0.64,1) both}
+    @keyframes dotBounce{0%,80%,100%{transform:translateY(0)}40%{transform:translateY(-5px)}}
+    #chat-messages .dot{animation:dotBounce 1.2s ease-in-out infinite}
+    #chat-messages .dot:nth-child(2){animation-delay:0.2s}
+    #chat-messages .dot:nth-child(3){animation-delay:0.4s}
+    @keyframes barGrow{from{width:0}to{width:84%}}
+    .bar-grow{animation:barGrow 1.3s 0.3s ease-out both}
   </style>
 </head>
 <body class="font-sans antialiased">
@@ -101,52 +109,44 @@
       </a>
     </div>
 
-    <!-- Chat Mockup -->
-    <div class="float max-w-sm w-full mx-auto bg-[#1a1a1a] border border-[#2a2a2a] rounded-3xl p-5 text-left shadow-2xl">
-      <div class="flex items-center gap-3 mb-4 pb-4 border-b border-[#2a2a2a]">
-        <div class="w-10 h-10 rounded-full bg-accent/20 flex items-center justify-center text-xl">🥑</div>
-        <div>
-          <div class="font-semibold text-sm">FatBotSlim</div>
-          <div class="text-xs text-green-400">● online</div>
-        </div>
-      </div>
-      <div class="space-y-3 text-sm">
-        <div class="flex justify-end">
-          <div class="bg-accent/20 text-white rounded-2xl rounded-tr-sm px-4 py-2.5" data-i18n="mock_msg1">
-            Chicken with rice 200g
-          </div>
-        </div>
-        <div class="flex justify-start">
-          <div class="bg-[#2a2a2a] rounded-2xl rounded-tl-sm px-4 py-3 max-w-xs">
-            <div class="font-semibold text-accent mb-1" data-i18n="mock_saved">✅ Logged!</div>
-            <div class="text-gray-300 text-sm" data-i18n="mock_dish">Chicken with rice (200g)</div>
-            <div class="mt-2 grid grid-cols-2 gap-x-4 gap-y-1 text-xs text-gray-400">
-              <span>🔥 <span class="text-white font-medium">284 kcal</span></span>
-              <span>💪 P: <span class="text-white font-medium">28g</span></span>
-              <span>🧈 F: <span class="text-white font-medium">6g</span></span>
-              <span>🌾 C: <span class="text-white font-medium">32g</span></span>
+    <!-- Animated Phone Mockup -->
+    <div class="float max-w-[290px] w-full mx-auto select-none" id="demo-phone">
+      <div class="relative bg-[#1c1c1e] rounded-[3rem] p-[10px]"
+           style="box-shadow:0 50px 120px rgba(0,0,0,0.9),0 0 0 1px rgba(255,255,255,0.07),inset 0 0 0 1px rgba(255,255,255,0.04);">
+        <!-- Side buttons -->
+        <div class="absolute -left-[3px] top-24 w-[3px] h-8 bg-[#2a2a2c] rounded-l-sm"></div>
+        <div class="absolute -left-[3px] top-36 w-[3px] h-14 bg-[#2a2a2c] rounded-l-sm"></div>
+        <div class="absolute -left-[3px] top-52 w-[3px] h-14 bg-[#2a2a2c] rounded-l-sm"></div>
+        <div class="absolute -right-[3px] top-36 w-[3px] h-20 bg-[#2a2a2c] rounded-r-sm"></div>
+        <!-- Screen -->
+        <div class="bg-[#000] rounded-[2.4rem] overflow-hidden" style="height:580px">
+          <!-- Dynamic island -->
+          <div class="flex justify-center pt-3 pb-1">
+            <div class="w-28 h-[22px] bg-[#111] rounded-full flex items-center justify-center">
+              <div class="w-2 h-2 bg-[#222] rounded-full"></div>
             </div>
           </div>
-        </div>
-        <div class="flex justify-end">
-          <div class="bg-accent/20 text-white rounded-2xl rounded-tr-sm px-4 py-2.5" data-i18n="mock_msg2">
-            📅 Daily summary
+          <!-- Status bar -->
+          <div class="flex justify-between items-center px-6 text-[11px] text-white font-medium pb-1">
+            <span>9:41</span>
+            <span class="text-[10px] text-gray-500">●●● WiFi 🔋</span>
           </div>
-        </div>
-        <div class="flex justify-start">
-          <div class="bg-[#2a2a2a] rounded-2xl rounded-tl-sm px-4 py-3 w-full max-w-xs">
-            <div class="font-semibold mb-2 text-sm" data-i18n="mock_today">📊 Today</div>
-            <div class="text-xs text-gray-400 space-y-2">
-              <div class="flex justify-between">
-                <span data-i18n="mock_calories">🔥 Calories</span>
-                <span class="text-white font-medium">1 840 / 2 200 kcal</span>
-              </div>
-              <div class="w-full bg-[#0d0d0d] rounded-full h-1.5">
-                <div class="bg-accent h-1.5 rounded-full" style="width:83%"></div>
-              </div>
-              <div class="text-right text-accent text-xs" data-i18n="mock_pct">83% of goal</div>
+          <!-- Telegram nav bar -->
+          <div class="bg-[#1c1c1e] px-4 py-2 flex items-center gap-2.5 border-b border-[#2c2c2e]">
+            <span class="text-[#0a84ff] text-sm font-medium">‹</span>
+            <div class="w-8 h-8 rounded-full bg-gradient-to-br from-green-400 to-green-600 flex items-center justify-center text-base">🥑</div>
+            <div class="flex-1">
+              <div class="text-white text-[13px] font-semibold">FatBotSlim</div>
+              <div class="text-[#30d158] text-[10px]">online</div>
             </div>
+            <span class="text-[#444] text-xl leading-none">⋯</span>
           </div>
+          <!-- Date chip -->
+          <div class="text-center py-2">
+            <span class="text-[#444] text-[10px] bg-[#111] px-2.5 py-0.5 rounded-full">Today</span>
+          </div>
+          <!-- Animated messages -->
+          <div id="chat-messages" class="px-3 space-y-2.5" style="height:455px;overflow:hidden"></div>
         </div>
       </div>
     </div>
@@ -494,5 +494,118 @@
     setLang(localStorage.getItem('fbs_lang') || 'en');
   </script>
 
+  <script>
+  (function(){
+    var MSGS = {
+      en:{
+        food:'📸  chicken breast\nwith rice 200g',
+        ack:'✅ Logged!',
+        dish:'Chicken breast with rice (200g)',
+        day:'📅 Daily summary',
+        today:'📊 Today',
+        cal:'🔥 Calories',
+        left:'🔋 Left: 360 kcal',
+        pct:'84% of goal'
+      },
+      ru:{
+        food:'📸  куриная грудка\nс рисом 200г',
+        ack:'✅ Записано!',
+        dish:'Куриная грудка с рисом (200г)',
+        day:'📅 Итоги дня',
+        today:'📊 Сегодня',
+        cal:'🔥 Калории',
+        left:'🔋 Осталось: 360 ккал',
+        pct:'84% от нормы'
+      }
+    };
+
+    var sleep = function(ms){ return new Promise(function(r){ setTimeout(r, ms); }); };
+
+    function appendMsg(box, html){
+      var wrap = document.createElement('div');
+      wrap.className = 'msg-in';
+      wrap.innerHTML = html;
+      box.appendChild(wrap);
+      return wrap;
+    }
+
+    function userBubble(text){
+      return '<div class="flex justify-end"><div class="bg-[#1a4a2a] text-white text-[12px] rounded-[18px] rounded-tr-[4px] px-3.5 py-2 max-w-[190px] whitespace-pre-line leading-relaxed">'+text+'</div></div>';
+    }
+
+    function typingBubble(){
+      return '<div class="flex justify-start"><div class="bg-[#1c1c1e] border border-[#2c2c2e] rounded-[18px] rounded-tl-[4px] px-3.5 py-3 flex gap-1.5 items-center"><div class="dot w-1.5 h-1.5 bg-[#555] rounded-full"></div><div class="dot w-1.5 h-1.5 bg-[#555] rounded-full"></div><div class="dot w-1.5 h-1.5 bg-[#555] rounded-full"></div></div></div>';
+    }
+
+    function foodReply(m){
+      return '<div class="flex justify-start"><div class="bg-[#1c1c1e] border border-[#2c2c2e] rounded-[18px] rounded-tl-[4px] px-3.5 py-2.5 max-w-[220px]">'
+        +'<div class="font-semibold text-[#30d158] text-[11px] mb-1">'+m.ack+'</div>'
+        +'<div class="text-[#777] text-[10px] mb-2">'+m.dish+'</div>'
+        +'<div class="grid grid-cols-2 gap-x-3 gap-y-1 text-[10px]">'
+        +'<span>🔥 <b class="text-white">284 kcal</b></span>'
+        +'<span>💪 P: <b class="text-white">38g</b></span>'
+        +'<span>🧈 F: <b class="text-white">4g</b></span>'
+        +'<span>🌾 C: <b class="text-white">28g</b></span>'
+        +'</div>'
+        +'<div class="flex gap-1.5 mt-2.5">'
+        +'<span class="bg-[#1a3a1a] border border-green-900/50 text-[#30d158] rounded-full px-2 py-0.5 text-[10px]">✅ OK</span>'
+        +'<span class="bg-[#1a1a3a] border border-blue-900/50 text-[#0a84ff] rounded-full px-2 py-0.5 text-[10px]">✏️ Edit</span>'
+        +'</div>'
+        +'</div></div>';
+    }
+
+    function dayReply(m){
+      return '<div class="flex justify-start"><div class="bg-[#1c1c1e] border border-[#2c2c2e] rounded-[18px] rounded-tl-[4px] px-3.5 py-2.5 max-w-[230px]">'
+        +'<div class="font-semibold text-[11px] mb-2">'+m.today+'</div>'
+        +'<div class="space-y-1.5 text-[10px] text-[#777]">'
+        +'<div class="flex justify-between"><span>'+m.cal+'</span><span class="text-white font-medium">1840 / 2200</span></div>'
+        +'<div class="w-full bg-[#2a2a2a] rounded-full" style="height:4px"><div class="bg-[#30d158] rounded-full bar-grow" style="height:4px;width:0"></div></div>'
+        +'<div class="flex justify-between"><span class="text-[#30d158]">'+m.pct+'</span><span>'+m.left+'</span></div>'
+        +'</div></div></div>';
+    }
+
+    async function runDemo(){
+      var box = document.getElementById('chat-messages');
+      if(!box) return;
+      while(true){
+        box.innerHTML = '';
+        var m = MSGS[localStorage.getItem('fbs_lang')||'en'];
+
+        await sleep(500);
+        appendMsg(box, userBubble(m.food));
+        await sleep(750);
+
+        var t1 = appendMsg(box, typingBubble());
+        await sleep(1800);
+        t1.remove();
+
+        appendMsg(box, foodReply(m));
+        await sleep(2200);
+
+        appendMsg(box, userBubble(m.day));
+        await sleep(750);
+
+        var t2 = appendMsg(box, typingBubble());
+        await sleep(1500);
+        t2.remove();
+
+        appendMsg(box, dayReply(m));
+        await sleep(4500);
+
+        box.style.transition = 'opacity 0.5s';
+        box.style.opacity = '0';
+        await sleep(600);
+        box.style.transition = '';
+        box.style.opacity = '1';
+      }
+    }
+
+    if(document.readyState === 'loading'){
+      document.addEventListener('DOMContentLoaded', runDemo);
+    } else {
+      setTimeout(runDemo, 200);
+    }
+  })();
+  </script>
 </body>
 </html>
