@@ -4,16 +4,16 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>FatBotSlim — AI Calorie Counter | Telegram & Mobile App</title>
-  <meta name="description" content="FatBotSlim — AI calorie tracker in Telegram and mobile app. Type what you ate or send a photo — AI calculates macros instantly. 7 days free, then €11.99/month.">
-  <meta name="keywords" content="calorie counter telegram, AI nutrition tracker, calorie bot, fatbotslim, weight loss app, food tracker, macros tracker, КБЖУ, счётчик калорий телеграм, мобильное приложение">
+  <meta name="description" content="FatBotSlim — AI calorie tracker in Telegram and mobile app. Type what you ate or send a photo — AI calculates macros instantly. Sugar tracker, barcode scanner, recipe from fridge. 7 days free, then €11.99/month.">
+  <meta name="keywords" content="calorie counter telegram, AI nutrition tracker, calorie bot, fatbotslim, weight loss app, food tracker, macros tracker, sugar tracker app, barcode calorie scanner, calorie counter 9 languages, КБЖУ, счётчик калорий телеграм, сахар в еде, мобильное приложение">
   <meta property="og:title" content="FatBotSlim — AI Calorie Counter | Telegram & Mobile App">
-  <meta property="og:description" content="AI calorie tracker in Telegram and mobile app. Type what you ate or send a photo — calculates macros instantly. Try free for 7 days.">
+  <meta property="og:description" content="AI calorie tracker in Telegram and mobile app. Type what you ate or send a photo — calculates macros instantly. Sugar tracker, barcode scanner. Try free for 7 days.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://fatbotslim.fit">
   <meta property="og:image" content="https://raw.githubusercontent.com/guannko/fatbotslim-landing/main/images/logo.png">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="FatBotSlim — AI Calorie Counter | Telegram & Mobile App">
-  <meta name="twitter:description" content="Track macros via Telegram or mobile app. Text or photo — AI does the math. 7 days free.">
+  <meta name="twitter:description" content="Track macros via Telegram or mobile app. Sugar tracker, barcode scanner, recipe from fridge. 7 days free.">
   <meta name="twitter:image" content="https://raw.githubusercontent.com/guannko/fatbotslim-landing/main/images/logo.png">
   <link rel="canonical" href="https://fatbotslim.fit">
   <meta name="google-site-verification" content="BKT3A4AlUsfH_6RTWAwEukSvxLpgFfm7VgNGheZ0xj4">
@@ -28,7 +28,7 @@
     "applicationCategory": "HealthApplication",
     "operatingSystem": "iOS, Android, Telegram",
     "url": "https://fatbotslim.fit",
-    "description": "AI-powered calorie counter and nutrition tracker — Telegram bot and mobile app. Send a photo or type what you ate — AI instantly calculates calories, protein, fat and carbs. Try free for 7 days.",
+    "description": "AI-powered calorie counter and nutrition tracker — Telegram bot and mobile app. Send a photo or type what you ate — AI instantly calculates calories, protein, fat, carbs and sugar. Barcode scanner, recipe from fridge. Try free for 7 days.",
     "screenshot": "https://raw.githubusercontent.com/guannko/fatbotslim-landing/main/images/logo.png",
     "offers": [
       {
@@ -43,12 +43,15 @@
     "featureList": [
       "AI photo food recognition",
       "Calorie and macros tracking",
+      "Sugar tracker with WHO daily limit",
+      "Barcode scanner (Open Food Facts + USDA)",
+      "AI recipe generator from available ingredients",
       "Daily food diary",
-      "7-day progress chart",
-      "Barcode scanner",
-      "AI meal plan generator"
+      "7-day and 30-day progress charts",
+      "Meal reminders",
+      "Available in 9 languages"
     ],
-    "inLanguage": ["en", "ru"],
+    "inLanguage": ["en", "ru", "de", "fr", "it", "es", "nl", "pl", "uk"],
     "publisher": {
       "@type": "Organization",
       "name": "FatBotSlim"
@@ -111,7 +114,6 @@
         <a href="#faq" class="hover:text-white transition">FAQ</a>
       </div>
       <div class="flex items-center gap-3">
-        <!-- Language switcher -->
         <div class="flex items-center bg-white/5 rounded-full p-1 text-xs font-semibold gap-1">
           <button onclick="setLang('en')" id="btn-en" class="lang-btn active px-3 py-1 rounded-full">EN</button>
           <button onclick="setLang('ru')" id="btn-ru" class="lang-btn px-3 py-1 rounded-full text-gray-400">RU</button>
@@ -127,7 +129,7 @@
   <section class="hero-bg min-h-screen flex flex-col items-center justify-center text-center px-4 pt-24 pb-16">
     <div class="inline-flex items-center gap-2 bg-accent/10 border border-accent/20 rounded-full px-4 py-2 text-sm text-accent mb-8">
       <span class="w-2 h-2 bg-accent rounded-full animate-pulse"></span>
-      <span data-i18n="hero_badge">AI nutrition tracker in Telegram</span>
+      <span data-i18n="hero_badge">AI nutrition tracker · 9 languages</span>
     </div>
 
     <h1 class="text-5xl md:text-7xl font-black leading-tight mb-6 max-w-4xl">
@@ -136,7 +138,7 @@
     </h1>
 
     <p class="text-xl text-gray-400 max-w-2xl mb-10 leading-relaxed" data-i18n="hero_desc">
-      Just type what you ate or send a photo — FatBotSlim instantly calculates calories, protein, fat and carbs. Works in Telegram and as a native mobile app.
+      Just type what you ate or send a photo — FatBotSlim instantly calculates calories, protein, fat, carbs and sugar. Works in Telegram and as a native mobile app. Available in 9 languages.
     </p>
 
     <div class="flex flex-col sm:flex-row gap-4 justify-center mb-16">
@@ -155,25 +157,20 @@
     <div class="float max-w-[290px] w-full mx-auto select-none" id="demo-phone">
       <div class="relative bg-[#1c1c1e] rounded-[3rem] p-[10px]"
            style="box-shadow:0 50px 120px rgba(0,0,0,0.9),0 0 0 1px rgba(255,255,255,0.07),inset 0 0 0 1px rgba(255,255,255,0.04);">
-        <!-- Side buttons -->
         <div class="absolute -left-[3px] top-24 w-[3px] h-8 bg-[#2a2a2c] rounded-l-sm"></div>
         <div class="absolute -left-[3px] top-36 w-[3px] h-14 bg-[#2a2a2c] rounded-l-sm"></div>
         <div class="absolute -left-[3px] top-52 w-[3px] h-14 bg-[#2a2a2c] rounded-l-sm"></div>
         <div class="absolute -right-[3px] top-36 w-[3px] h-20 bg-[#2a2a2c] rounded-r-sm"></div>
-        <!-- Screen -->
         <div class="bg-[#000] rounded-[2.4rem] overflow-hidden" style="height:580px">
-          <!-- Dynamic island -->
           <div class="flex justify-center pt-3 pb-1">
             <div class="w-28 h-[22px] bg-[#111] rounded-full flex items-center justify-center">
               <div class="w-2 h-2 bg-[#222] rounded-full"></div>
             </div>
           </div>
-          <!-- Status bar -->
           <div class="flex justify-between items-center px-6 text-[11px] text-white font-medium pb-1">
             <span>9:41</span>
             <span class="text-[10px] text-gray-500">●●● WiFi 🔋</span>
           </div>
-          <!-- Telegram nav bar -->
           <div class="bg-[#1c1c1e] px-4 py-2 flex items-center gap-2.5 border-b border-[#2c2c2e]">
             <span class="text-[#0a84ff] text-sm font-medium">‹</span>
             <img src="https://raw.githubusercontent.com/guannko/fatbotslim-landing/main/images/logo.png" alt="FatBotSlim" class="w-8 h-8 rounded-full object-cover">
@@ -183,11 +180,9 @@
             </div>
             <span class="text-[#444] text-xl leading-none">⋯</span>
           </div>
-          <!-- Date chip -->
           <div class="text-center py-2">
             <span class="text-[#444] text-[10px] bg-[#111] px-2.5 py-0.5 rounded-full">Today</span>
           </div>
-          <!-- Animated messages -->
           <div id="chat-messages" class="px-3 space-y-2.5" style="height:455px;overflow:hidden"></div>
         </div>
       </div>
@@ -204,8 +199,8 @@
         <div class="text-gray-500 text-sm mt-1" data-i18n="stat1">food recognition</div>
       </div>
       <div>
-        <div class="text-4xl font-black gradient-text" data-i18n="stat2_val">Macros</div>
-        <div class="text-gray-500 text-sm mt-1" data-i18n="stat2">instantly</div>
+        <div class="text-4xl font-black gradient-text" data-i18n="stat2_val">9</div>
+        <div class="text-gray-500 text-sm mt-1" data-i18n="stat2">languages</div>
       </div>
       <div>
         <div class="text-4xl font-black gradient-text">24/7</div>
@@ -225,7 +220,7 @@
         <span data-i18n="feat_title1">Everything you need for</span><br>
         <span class="gradient-text" data-i18n="feat_title2">nutrition control</span>
       </h2>
-      <p class="text-gray-400 text-center mb-16 max-w-2xl mx-auto" data-i18n="feat_sub">Works in Telegram and as a native iOS & Android app.</p>
+      <p class="text-gray-400 text-center mb-16 max-w-2xl mx-auto" data-i18n="feat_sub">Works in Telegram and as a native iOS & Android app. Available in 9 languages.</p>
 
       <div class="grid md:grid-cols-3 gap-6">
         <div class="card-bg border border-[#2a2a2a] rounded-3xl p-6 hover:border-accent/30 transition">
@@ -236,7 +231,22 @@
         <div class="card-bg border border-[#2a2a2a] rounded-3xl p-6 hover:border-accent/30 transition">
           <div class="text-4xl mb-4">💬</div>
           <h3 class="text-xl font-bold mb-2" data-i18n="f2_title">Text → Calories</h3>
-          <p class="text-gray-400 text-sm leading-relaxed" data-i18n="f2_desc">Type "chicken rice 200g" or "2 eggs with toast" — the bot understands and logs it. Works in English and Russian.</p>
+          <p class="text-gray-400 text-sm leading-relaxed" data-i18n="f2_desc">Type "chicken rice 200g" or "2 eggs with toast" — the bot understands and logs it. Works in 9 languages.</p>
+        </div>
+        <div class="card-bg border border-[#2a2a2a] rounded-3xl p-6 hover:border-accent/30 transition">
+          <div class="text-4xl mb-4">🍬</div>
+          <h3 class="text-xl font-bold mb-2" data-i18n="f7_title">Sugar Tracker</h3>
+          <p class="text-gray-400 text-sm leading-relaxed" data-i18n="f7_desc">See how much sugar is in each meal. WHO daily limit indicator: 🟢 low · 🟡 medium · 🔴 high — always know where you stand.</p>
+        </div>
+        <div class="card-bg border border-[#2a2a2a] rounded-3xl p-6 hover:border-accent/30 transition">
+          <div class="text-4xl mb-4">📦</div>
+          <h3 class="text-xl font-bold mb-2" data-i18n="f8_title">Barcode Scanner</h3>
+          <p class="text-gray-400 text-sm leading-relaxed" data-i18n="f8_desc">Scan any product at the store — instant data from Open Food Facts & USDA. Millions of products, works worldwide.</p>
+        </div>
+        <div class="card-bg border border-[#2a2a2a] rounded-3xl p-6 hover:border-accent/30 transition">
+          <div class="text-4xl mb-4">🧑‍🍳</div>
+          <h3 class="text-xl font-bold mb-2" data-i18n="f9_title">Recipe from Fridge</h3>
+          <p class="text-gray-400 text-sm leading-relaxed" data-i18n="f9_desc">Tell the AI what's in your fridge — get a recipe with full nutrition breakdown. Cook what you have, know what you eat.</p>
         </div>
         <div class="card-bg border border-[#2a2a2a] rounded-3xl p-6 hover:border-accent/30 transition">
           <div class="text-4xl mb-4">📊</div>
@@ -275,7 +285,7 @@
         <div class="flex flex-col items-center">
           <div class="w-16 h-16 rounded-2xl bg-accent/10 border border-accent/30 flex items-center justify-center text-2xl font-black text-accent mb-5">1</div>
           <h3 class="font-bold text-lg mb-2" data-i18n="step1_title">Open the bot</h3>
-          <p class="text-gray-400 text-sm leading-relaxed" data-i18n="step1_desc">Press Start in @fatbotslim_ai_bot and choose your interface language. Takes 10 seconds.</p>
+          <p class="text-gray-400 text-sm leading-relaxed" data-i18n="step1_desc">Press Start in @fatbotslim_ai_bot or download the app. Choose your language from 9 available. Takes 10 seconds.</p>
         </div>
         <div class="flex flex-col items-center">
           <div class="w-16 h-16 rounded-2xl bg-accent/10 border border-accent/30 flex items-center justify-center text-2xl font-black text-accent mb-5">2</div>
@@ -285,7 +295,7 @@
         <div class="flex flex-col items-center">
           <div class="w-16 h-16 rounded-2xl bg-accent/10 border border-accent/30 flex items-center justify-center text-2xl font-black text-accent mb-5">3</div>
           <h3 class="font-bold text-lg mb-2" data-i18n="step3_title">Log your food</h3>
-          <p class="text-gray-400 text-sm leading-relaxed" data-i18n="step3_desc">Text or photo — the bot counts and records macros. Check your summary anytime.</p>
+          <p class="text-gray-400 text-sm leading-relaxed" data-i18n="step3_desc">Text, photo or barcode scan — AI counts calories, macros and sugar. Check your summary anytime.</p>
         </div>
       </div>
     </div>
@@ -310,9 +320,9 @@
           <ul class="space-y-3 text-sm text-gray-400 mb-8">
             <li class="flex gap-3 items-center"><span class="text-accent font-bold">✓</span> <span data-i18n="free_f1">All Premium features included</span></li>
             <li class="flex gap-3 items-center"><span class="text-accent font-bold">✓</span> <span data-i18n="free_f2">Unlimited logs</span></li>
-            <li class="flex gap-3 items-center"><span class="text-accent font-bold">✓</span> <span data-i18n="free_f3">Photo & text recognition</span></li>
+            <li class="flex gap-3 items-center"><span class="text-accent font-bold">✓</span> <span data-i18n="free_f3">Photo, text & barcode</span></li>
             <li class="flex gap-3 items-center"><span class="text-accent font-bold">✓</span> <span data-i18n="free_f4">30-day history</span></li>
-            <li class="flex gap-3 items-center"><span class="text-accent font-bold">✓</span> <span data-i18n="free_f5">Progress chart</span></li>
+            <li class="flex gap-3 items-center"><span class="text-accent font-bold">✓</span> <span data-i18n="free_f5">Sugar tracker</span></li>
             <li class="flex gap-3 items-center"><span class="text-accent font-bold">✓</span> <span data-i18n="free_f6">No credit card required</span></li>
           </ul>
           <a href="https://t.me/fatbotslim_ai_bot" target="_blank"
@@ -327,10 +337,10 @@
           <div class="text-gray-600 text-sm mb-8" data-i18n="premium_period">per month</div>
           <ul class="space-y-3 text-sm mb-8">
             <li class="flex gap-3 items-center"><span class="text-accent font-bold">✓</span> <span data-i18n="prem_f1">Unlimited logs</span></li>
-            <li class="flex gap-3 items-center"><span class="text-accent font-bold">✓</span> <span data-i18n="prem_f2">Text recognition</span></li>
-            <li class="flex gap-3 items-center"><span class="text-accent font-bold">✓</span> <strong data-i18n="prem_f3">Photo analysis</strong></li>
-            <li class="flex gap-3 items-center"><span class="text-accent font-bold">✓</span> <span data-i18n="prem_f4">30-day history</span></li>
-            <li class="flex gap-3 items-center"><span class="text-accent font-bold">✓</span> <strong data-i18n="prem_f5">Progress chart</strong></li>
+            <li class="flex gap-3 items-center"><span class="text-accent font-bold">✓</span> <strong data-i18n="prem_f2">Photo & barcode analysis</strong></li>
+            <li class="flex gap-3 items-center"><span class="text-accent font-bold">✓</span> <strong data-i18n="prem_f3">Sugar tracker (WHO limit)</strong></li>
+            <li class="flex gap-3 items-center"><span class="text-accent font-bold">✓</span> <span data-i18n="prem_f4">30-day history & charts</span></li>
+            <li class="flex gap-3 items-center"><span class="text-accent font-bold">✓</span> <strong data-i18n="prem_f5">Recipe from fridge</strong></li>
             <li class="flex gap-3 items-center"><span class="text-accent font-bold">✓</span> <span data-i18n="prem_f6">Priority support</span></li>
           </ul>
           <a href="https://t.me/fatbotslim_ai_bot" target="_blank"
@@ -353,14 +363,14 @@
             <span data-i18n="faq1_q">Do I need to install an app?</span>
             <span class="plus text-accent text-xl leading-none">+</span>
           </summary>
-          <p class="text-gray-400 text-sm mt-4 leading-relaxed" data-i18n="faq1_a">FatBotSlim works in Telegram — no extra install needed. We also have a native mobile app for iOS and Android with barcode scanner, photo recognition and full calorie tracking.</p>
+          <p class="text-gray-400 text-sm mt-4 leading-relaxed" data-i18n="faq1_a">FatBotSlim works in Telegram — no extra install needed. We also have a native mobile app for iOS and Android with barcode scanner, photo recognition, sugar tracker and full calorie tracking.</p>
         </details>
         <details class="border border-[#2a2a2a] rounded-2xl p-6 cursor-pointer">
           <summary class="font-semibold flex justify-between items-center list-none">
             <span data-i18n="faq2_q">How accurate is the AI calorie count?</span>
             <span class="plus text-accent text-xl leading-none">+</span>
           </summary>
-          <p class="text-gray-400 text-sm mt-4 leading-relaxed" data-i18n="faq2_a">AI gives an approximate estimate based on standard portions and composition. For home-cooked meals, accuracy is around 85–90%. You can always adjust the weight directly in the chat if needed.</p>
+          <p class="text-gray-400 text-sm mt-4 leading-relaxed" data-i18n="faq2_a">AI gives an approximate estimate based on standard portions and composition. You can always adjust the weight directly in the chat or app if needed. For packaged foods, use the barcode scanner for exact data.</p>
         </details>
         <details class="border border-[#2a2a2a] rounded-2xl p-6 cursor-pointer">
           <summary class="font-semibold flex justify-between items-center list-none">
@@ -371,10 +381,10 @@
         </details>
         <details class="border border-[#2a2a2a] rounded-2xl p-6 cursor-pointer">
           <summary class="font-semibold flex justify-between items-center list-none">
-            <span data-i18n="faq4_q">Can I write in both Russian and English?</span>
+            <span data-i18n="faq4_q">What languages are supported?</span>
             <span class="plus text-accent text-xl leading-none">+</span>
           </summary>
-          <p class="text-gray-400 text-sm mt-4 leading-relaxed" data-i18n="faq4_a">Yes, the bot understands both languages. You choose the interface language (EN/RU) on first launch, but you can type food names in any language — the bot will figure it out.</p>
+          <p class="text-gray-400 text-sm mt-4 leading-relaxed" data-i18n="faq4_a">FatBotSlim supports 9 languages: English, Russian, German, French, Italian, Spanish, Dutch, Polish and Ukrainian. Choose your language on first launch — the full interface adapts. You can also type food names in any language and the AI will understand.</p>
         </details>
         <details class="border border-[#2a2a2a] rounded-2xl p-6 cursor-pointer">
           <summary class="font-semibold flex justify-between items-center list-none">
@@ -426,39 +436,42 @@
     const t = {
       en: {
         nav_features: 'Features', nav_how: 'How it works', nav_pricing: 'Pricing', nav_cta: 'Try for free',
-        hero_badge: 'AI nutrition tracker in Telegram',
+        hero_badge: 'AI nutrition tracker · 9 languages',
         hero_h1_1: 'Count calories', hero_h1_2: 'without apps or spreadsheets',
-        hero_desc: 'Just type what you ate or send a photo — FatBotSlim instantly calculates calories, protein, fat and carbs. Works in Telegram and as a native mobile app.',
+        hero_desc: 'Just type what you ate or send a photo — FatBotSlim instantly calculates calories, protein, fat, carbs and sugar. Works in Telegram and as a native mobile app. Available in 9 languages.',
         hero_cta_main: 'Open in Telegram', hero_cta_sec: 'How it works',
         mock_msg1: 'Chicken with rice 200g', mock_saved: '✅ Logged!', mock_dish: 'Chicken with rice (200g)',
-        mock_msg2: '📅 Daily summary', mock_today: '📊 Today', mock_calories: '🔥 Calories', mock_pct: '83% of goal',
+        mock_msg2: '📅 Daily summary', mock_today: '📊 Today', mock_calories: '🔥 Calories', mock_left: '🔋 Left: 360 kcal', mock_pct: '84% of goal',
         hero_footnote: '7 days free · No credit card · Telegram + App',
-        stat1: 'food recognition', stat2_val: 'Macros', stat2: 'instantly', stat3: 'always on', stat4: 'per month Premium',
+        stat1: 'food recognition', stat2_val: '9', stat2: 'languages', stat3: 'always on', stat4: 'per month Premium',
         feat_title1: 'Everything you need for', feat_title2: 'nutrition control',
-        feat_sub: 'Works in Telegram and as a native iOS & Android app.',
+        feat_sub: 'Works in Telegram and as a native iOS & Android app. Available in 9 languages.',
         f1_title: 'Photo → Calories', f1_desc: 'Take a photo of your meal and send it. AI recognizes the food and calculates macros — no manual searching required.',
-        f2_title: 'Text → Calories', f2_desc: 'Type "chicken rice 200g" or "2 eggs with toast" — the bot understands and logs it. Works in English and Russian.',
+        f2_title: 'Text → Calories', f2_desc: 'Type "chicken rice 200g" or "2 eggs with toast" — the bot understands and logs it. Works in 9 languages.',
         f3_title: 'Daily Summary', f3_desc: 'Check calories and macros at any time. With a progress bar against your daily goal — always know where you stand.',
         f4_title: 'Progress Chart', f4_desc: 'View trends over 7 and 30 days. Track your nutrition dynamics without exporting data or switching apps.',
         f5_title: 'Personal Goals', f5_desc: 'Set your daily calorie target. The bot always shows how much more you can eat before hitting your limit.',
         f6_title: 'Edit Entries', f6_desc: 'Wrong weight? Fix any log entry right in the chat — no need to delete and start over.',
+        f7_title: 'Sugar Tracker', f7_desc: 'See how much sugar is in each meal. WHO daily limit indicator: 🟢 low · 🟡 medium · 🔴 high — always know where you stand.',
+        f8_title: 'Barcode Scanner', f8_desc: 'Scan any product at the store — instant data from Open Food Facts & USDA. Millions of products, works worldwide.',
+        f9_title: 'Recipe from Fridge', f9_desc: 'Tell the AI what\'s in your fridge — get a recipe with full nutrition breakdown. Cook what you have, know what you eat.',
         how_title1: 'Three steps', how_title2: 'to results',
         how_sub: 'Setup takes 30 seconds. Then just log what you eat.',
-        step1_title: 'Open the bot', step1_desc: 'Press Start in @fatbotslim_ai_bot and choose your interface language. Takes 10 seconds.',
+        step1_title: 'Open the bot', step1_desc: 'Press Start in @fatbotslim_ai_bot or download the app. Choose your language from 9 available. Takes 10 seconds.',
         step2_title: 'Set your goal', step2_desc: 'Enter your daily calorie target. The bot will track every meal against it.',
-        step3_title: 'Log your food', step3_desc: 'Text or photo — the bot counts and records macros. Check your summary anytime.',
+        step3_title: 'Log your food', step3_desc: 'Text, photo or barcode scan — AI counts calories, macros and sugar. Check your summary anytime.',
         price_title1: 'Simple', price_title2: 'pricing', price_sub: 'Try free for 7 days. Then €11.99/month — cancel anytime.',
         free_label: 'Free Trial', free_days_unit: 'days', free_period: 'then €11.99/month',
-        free_f1: 'All Premium features included', free_f2: 'Unlimited logs', free_f3: 'Photo & text recognition',
-        free_f4: '30-day history', free_f5: 'Progress chart', free_f6: 'No credit card required', free_btn: 'Start free trial',
+        free_f1: 'All Premium features included', free_f2: 'Unlimited logs', free_f3: 'Photo, text & barcode',
+        free_f4: '30-day history', free_f5: 'Sugar tracker', free_f6: 'No credit card required', free_btn: 'Start free trial',
         premium_badge: 'Popular', premium_period: 'per month',
-        prem_f1: 'Unlimited logs', prem_f2: 'Text recognition', prem_f3: 'Photo analysis',
-        prem_f4: '30-day history', prem_f5: 'Progress chart', prem_f6: 'Priority support', prem_btn: 'Get Premium',
+        prem_f1: 'Unlimited logs', prem_f2: 'Photo & barcode analysis', prem_f3: 'Sugar tracker (WHO limit)',
+        prem_f4: '30-day history & charts', prem_f5: 'Recipe from fridge', prem_f6: 'Priority support', prem_btn: 'Get Premium',
         faq_title1: 'Common', faq_title2: 'questions',
-        faq1_q: 'Do I need to install an app?', faq1_a: 'FatBotSlim works in Telegram — no extra install needed. We also have a native mobile app for iOS and Android with barcode scanner, photo recognition and full calorie tracking.',
-        faq2_q: 'How accurate is the AI calorie count?', faq2_a: 'AI gives an approximate estimate based on standard portions and composition. For home-cooked meals, accuracy is around 85–90%. You can always adjust the weight directly in the chat.',
+        faq1_q: 'Do I need to install an app?', faq1_a: 'FatBotSlim works in Telegram — no extra install needed. We also have a native mobile app for iOS and Android with barcode scanner, photo recognition, sugar tracker and full calorie tracking.',
+        faq2_q: 'How accurate is the AI calorie count?', faq2_a: 'AI gives an approximate estimate based on standard portions and composition. You can always adjust the weight directly in the chat or app. For packaged foods, use the barcode scanner for exact data.',
         faq3_q: 'Is my data safe?', faq3_a: 'All data is stored in a secure cloud database. We never sell or share your data with third parties. Your food history is linked to your account only.',
-        faq4_q: 'Can I write in both Russian and English?', faq4_a: 'Yes, the bot understands both languages. You choose the interface language (EN/RU) on first launch, but food names can be typed in any language.',
+        faq4_q: 'What languages are supported?', faq4_a: 'FatBotSlim supports 9 languages: English, Russian, German, French, Italian, Spanish, Dutch, Polish and Ukrainian. Choose your language on first launch — the full interface adapts.',
         faq5_q: 'How do I cancel my Premium subscription?', faq5_a: 'Cancel anytime via the /pay command in the bot or in the app settings. Your access continues until the end of the paid period — no money is lost.',
         cta_title1: 'Start counting', cta_title2: 'right now',
         cta_desc: 'Open the bot or download the app and log your first meal — it takes 10 seconds.',
@@ -467,39 +480,42 @@
       },
       ru: {
         nav_features: 'Возможности', nav_how: 'Как работает', nav_pricing: 'Цены', nav_cta: 'Попробовать бесплатно',
-        hero_badge: 'AI-трекер питания в Telegram',
+        hero_badge: 'AI-трекер питания · 9 языков',
         hero_h1_1: 'Считай калории', hero_h1_2: 'без таблиц и приложений',
-        hero_desc: 'Просто напиши что съел или пришли фото блюда — FatBotSlim мгновенно посчитает калории, белки, жиры и углеводы. Работает в Telegram и как нативное мобильное приложение.',
+        hero_desc: 'Просто напиши что съел или пришли фото блюда — FatBotSlim мгновенно посчитает калории, белки, жиры, углеводы и сахар. Работает в Telegram и как нативное мобильное приложение. Доступно на 9 языках.',
         hero_cta_main: 'Открыть в Telegram', hero_cta_sec: 'Как это работает',
         mock_msg1: 'Гречка с курицей 200г', mock_saved: '✅ Записано!', mock_dish: 'Гречка с курицей (200г)',
-        mock_msg2: '📅 Итоги дня', mock_today: '📊 Сегодня', mock_calories: '🔥 Калории', mock_pct: '83% от нормы',
+        mock_msg2: '📅 Итоги дня', mock_today: '📊 Сегодня', mock_calories: '🔥 Калории', mock_left: '🔋 Осталось: 360 ккал', mock_pct: '84% от нормы',
         hero_footnote: '7 дней бесплатно · Без карты · Telegram + приложение',
-        stat1: 'распознавание блюд', stat2_val: 'КБЖУ', stat2: 'мгновенно', stat3: 'работает всегда', stat4: 'в месяц за Premium',
+        stat1: 'распознавание блюд', stat2_val: '9', stat2: 'языков', stat3: 'работает всегда', stat4: 'в месяц за Premium',
         feat_title1: 'Всё что нужно для', feat_title2: 'контроля питания',
-        feat_sub: 'Работает в Telegram и как нативное приложение для iOS и Android.',
+        feat_sub: 'Работает в Telegram и как нативное приложение для iOS и Android. Доступно на 9 языках.',
         f1_title: 'Фото → Калории', f1_desc: 'Сфотографируй блюдо и отправь боту. AI распознает еду и посчитает КБЖУ автоматически — никакого ручного поиска.',
-        f2_title: 'Текст → Калории', f2_desc: 'Напиши «борщ 300г» или «2 яйца с тостом» — бот поймёт и запишет. Работает на русском и английском.',
+        f2_title: 'Текст → Калории', f2_desc: 'Напиши «борщ 300г» или «2 яйца с тостом» — бот поймёт и запишет. Работает на 9 языках.',
         f3_title: 'Итоги дня', f3_desc: 'В любой момент посмотри сколько ккал и нутриентов съел сегодня. С прогресс-баром относительно твоей нормы.',
         f4_title: 'График прогресса', f4_desc: 'Смотри тренды за 7 и 30 дней. Следи за динамикой питания без экспорта данных и лишних экранов.',
         f5_title: 'Личные цели', f5_desc: 'Установи свою норму калорий. Бот всегда покажет сколько ещё можно съесть до конца дня.',
         f6_title: 'Редактирование', f6_desc: 'Ошибся с граммовкой? Бот позволит скорректировать любую запись прямо в чате без перезапуска.',
+        f7_title: 'Контроль сахара', f7_desc: 'Видь сколько сахара в каждом блюде. Индикатор нормы ВОЗ: 🟢 низкий · 🟡 средний · 🔴 высокий — всегда знай где ты находишься.',
+        f8_title: 'Сканер штрихкодов', f8_desc: 'Сканируй любой продукт в магазине — мгновенные данные из Open Food Facts и USDA. Миллионы продуктов по всему миру.',
+        f9_title: 'Рецепт из холодильника', f9_desc: 'Скажи AI что есть в холодильнике — получи рецепт с полным составом КБЖУ. Готовь из того что есть, зная что съешь.',
         how_title1: 'Три шага', how_title2: 'до результата',
         how_sub: 'Настройка занимает 30 секунд. Дальше — просто пиши что ешь.',
-        step1_title: 'Открой бота', step1_desc: 'Нажми Start в @fatbotslim_ai_bot и выбери язык интерфейса. Займёт 10 секунд.',
+        step1_title: 'Открой бота', step1_desc: 'Нажми Start в @fatbotslim_ai_bot или скачай приложение. Выбери язык из 9 доступных. Займёт 10 секунд.',
         step2_title: 'Укажи норму', step2_desc: 'Установи свою дневную норму калорий. Бот будет ориентироваться на неё.',
-        step3_title: 'Отправляй еду', step3_desc: 'Текст или фото — бот считает и записывает КБЖУ. Смотри итоги в любое время.',
+        step3_title: 'Отправляй еду', step3_desc: 'Текст, фото или штрихкод — AI считает калории, КБЖУ и сахар. Смотри итоги в любое время.',
         price_title1: 'Простые', price_title2: 'цены', price_sub: 'Попробуй бесплатно 7 дней. Затем €11.99/мес — отменяй в любой момент.',
         free_label: 'Пробный период', free_days_unit: 'дней', free_period: 'затем €11.99/месяц',
-        free_f1: 'Все функции Premium включены', free_f2: 'Безлимитные записи', free_f3: 'Фото и текст',
-        free_f4: 'История за 30 дней', free_f5: 'График прогресса', free_f6: 'Карта не нужна', free_btn: 'Начать бесплатно',
+        free_f1: 'Все функции Premium включены', free_f2: 'Безлимитные записи', free_f3: 'Фото, текст и штрихкод',
+        free_f4: 'История за 30 дней', free_f5: 'Контроль сахара', free_f6: 'Карта не нужна', free_btn: 'Начать бесплатно',
         premium_badge: 'Популярный', premium_period: 'в месяц',
-        prem_f1: 'Безлимитные записи', prem_f2: 'Распознавание текста', prem_f3: 'Фото-анализ блюд',
-        prem_f4: 'История за 30 дней', prem_f5: 'График прогресса', prem_f6: 'Приоритетная поддержка', prem_btn: 'Получить Premium',
+        prem_f1: 'Безлимитные записи', prem_f2: 'Фото и сканер штрихкодов', prem_f3: 'Контроль сахара (норма ВОЗ)',
+        prem_f4: 'История и графики за 30 дней', prem_f5: 'Рецепт из холодильника', prem_f6: 'Приоритетная поддержка', prem_btn: 'Получить Premium',
         faq_title1: 'Частые', faq_title2: 'вопросы',
-        faq1_q: 'Нужно ли устанавливать приложение?', faq1_a: 'FatBotSlim работает в Telegram — ничего дополнительно устанавливать не нужно. Также есть нативное мобильное приложение для iOS и Android со сканером штрихкодов, фото-анализом и полным трекингом питания.',
-        faq2_q: 'Насколько точно AI определяет калории?', faq2_a: 'AI даёт приближённую оценку на основе стандартных порций и состава блюд. Для домашней еды точность около 85–90%. Можно скорректировать граммовку прямо в чате.',
+        faq1_q: 'Нужно ли устанавливать приложение?', faq1_a: 'FatBotSlim работает в Telegram — ничего дополнительно устанавливать не нужно. Также есть нативное мобильное приложение для iOS и Android со сканером штрихкодов, фото-анализом, трекером сахара и полным трекингом питания.',
+        faq2_q: 'Насколько точно AI определяет калории?', faq2_a: 'AI даёт приближённую оценку на основе стандартных порций и состава блюд. Можно скорректировать граммовку прямо в чате или приложении. Для упакованных продуктов используй сканер штрихкодов — там точные данные.',
         faq3_q: 'Мои данные в безопасности?', faq3_a: 'Все данные хранятся в защищённой облачной базе данных. Мы не продаём и не передаём твои данные третьим лицам. История питания привязана к твоему аккаунту.',
-        faq4_q: 'Можно писать на русском и английском?', faq4_a: 'Да, бот понимает оба языка. При первом запуске выбираешь язык интерфейса (RU/EN), но названия блюд можно писать на любом — бот поймёт.',
+        faq4_q: 'Какие языки поддерживаются?', faq4_a: 'FatBotSlim поддерживает 9 языков: английский, русский, немецкий, французский, итальянский, испанский, нидерландский, польский и украинский. Выбери язык при первом запуске — весь интерфейс адаптируется.',
         faq5_q: 'Как отменить Premium подписку?', faq5_a: 'Отменить можно в любой момент через команду /pay в боте или в настройках приложения. Доступ сохраняется до конца оплаченного периода — деньги не сгорают.',
         cta_title1: 'Начни считать', cta_title2: 'прямо сейчас',
         cta_desc: 'Открой бота или скачай приложение и запиши первый приём пищи — это займёт 10 секунд.',
@@ -519,13 +535,11 @@
       document.getElementById('btn-en').classList.toggle('text-gray-400', lang !== 'en');
       document.getElementById('btn-ru').classList.toggle('active', lang === 'ru');
       document.getElementById('btn-ru').classList.toggle('text-gray-400', lang !== 'ru');
-      // Update page title and meta
       document.title = lang === 'ru'
         ? 'FatBotSlim — AI трекер калорий | Telegram и приложение'
         : 'FatBotSlim — AI Calorie Counter | Telegram & Mobile App';
     }
 
-    // Init: default EN, override from localStorage
     setLang(localStorage.getItem('fbs_lang') || 'en');
   </script>
 
@@ -581,6 +595,7 @@
         +'<span>💪 P: <b class="text-white">38g</b></span>'
         +'<span>🧈 F: <b class="text-white">4g</b></span>'
         +'<span>🌾 C: <b class="text-white">28g</b></span>'
+        +'<span>🍬 S: <b class="text-white">2g 🟢</b></span>'
         +'</div>'
         +'<div class="flex gap-1.5 mt-2.5">'
         +'<span class="bg-[#1a3a1a] border border-green-900/50 text-[#30d158] rounded-full px-2 py-0.5 text-[10px]">✅ OK</span>'
