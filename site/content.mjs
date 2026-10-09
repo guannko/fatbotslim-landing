@@ -98,3 +98,67 @@ Object.assign(content.ru, {
 });
 content.ru.faq[0][1]='FatBotSlim — ИИ-дневник питания для записи еды и оценки калорий и БЖУ. Готовим веб-версию и Android-релиз; Telegram-бот — альтернативный вариант. Разработчик — Brain Index.';
 content.ru.faq[1]=['Где можно пользоваться приложением?','Готовим доступ через браузер и загрузку для Android. Проверенные ссылки появятся после релиза. Также можно познакомиться с Telegram-вариантом ниже.'];
+
+// Product-wide legal copy used by the mobile app, Telegram experience and
+// marketing website. Keep these notices aligned with the actual data flows.
+Object.assign(content.en, {
+  privacy:'Privacy', terms:'Terms',
+  privacyTitle:'FatBotSlim Privacy Notice',
+  privacyIntro:'Effective 14 September 2026. This notice covers the FatBotSlim mobile app, Telegram bot and website operated by BRAININDEX OÜ in Estonia.',
+  privacySections:[
+    ['Data you provide','We process account details, profile and nutrition goals, meal entries, weight and water logs, support messages, and the dietary restrictions or health context you choose to provide. Health context is optional and is used only to tailor food warnings and recommendations.'],
+    ['Food photos and AI analysis','When you request photo analysis, the selected image is sent through our protected backend to the configured AI provider to identify food and estimate nutrition. We do not keep the submitted image in the shared cloud database. If you explicitly choose to keep a meal photo, the app stores a copy only in its private storage on that device; you can delete those local copies in Profile. Do not submit photos unrelated to food or containing people or sensitive documents.'],
+    ['Nutrition data sources','FatBotSlim may enrich estimates with product and nutrient records from USDA FoodData Central and Open Food Facts. These sources and AI output can be incomplete or wrong, so you must review serving size, ingredients and warnings. FatBotSlim does not provide medical diagnosis or treatment.'],
+    ['Service providers','Supabase provides authentication, database and backend hosting. Google Gemini may process meal text or images for AI analysis. RevenueCat and Apple or Google process subscription status and store purchases. Telegram processes interactions when you use the bot. USDA and Open Food Facts answer nutrition lookups. Each provider handles data under its own terms and privacy notice.'],
+    ['Purpose and legal basis','We use this data to provide the diary, synchronize your account, calculate summaries, personalize guidance, prevent abuse, support users and administer subscriptions. Depending on the context, processing is necessary to provide the service, based on your consent for optional health context, or based on our legitimate interest in securing and improving the product. We do not sell personal data or use meal and health data for advertising.'],
+    ['Retention and deletion','Cloud diary and profile data is kept while your account is active and for a limited period when needed for security, legal or support obligations. Device-only meal photos remain until you remove them, clear app data or uninstall the app. Use Delete account and data in the app Profile to initiate deletion of FitBot data, or contact hello@brain-index.com. Store subscriptions must be cancelled separately.'],
+    ['Security and international processing','We use access controls, authenticated backend functions and database row-level security. No online system is risk-free. Providers may process data outside your country using their applicable transfer safeguards.'],
+    ['Your choices and rights','You can correct diary entries and profile details, withdraw optional health-data consent, remove local photos, disable notifications and contact us to request access, correction, portability, restriction, objection or deletion where applicable. You may also complain to your local data-protection authority.'],
+    ['Children','FatBotSlim is not intended for children under 16. A parent or guardian should contact us if a child has provided personal data.'],
+    ['Controller and contact','Controller: BRAININDEX OÜ, Estonia. Privacy and support contact: hello@brain-index.com. We will post material changes on this page and update the effective date.'],
+  ],
+  termsTitle:'FatBotSlim Terms of Use',
+  termsIntro:'Effective 14 September 2026. By using FatBotSlim, you agree to these terms. If you do not agree, do not use the product.',
+  termsSections:[
+    ['The service','FatBotSlim is an AI-assisted food diary for recording meals and estimating calories and nutrients. Features may differ between the mobile app and Telegram bot and may change as the product develops.'],
+    ['Not medical advice','Results are estimates, not laboratory measurements, diagnosis or treatment. Photos cannot reveal every ingredient, allergen or portion. Review entries and consult a qualified professional for medical, allergy, pregnancy, eating-disorder or therapeutic-diet decisions. Do not use FatBotSlim for emergencies.'],
+    ['Your account and content','Provide accurate account information, protect your sign-in method and use only content you have the right to submit. You remain responsible for what you record and for decisions based on the output.'],
+    ['Subscriptions','Paid features, price, billing period and any trial are shown by the App Store or Google Play before purchase. Subscriptions renew automatically unless cancelled through the relevant store. The store handles billing, cancellation and refund requests under its rules. Restoring a purchase requires the same store account.'],
+    ['Acceptable use','Do not misuse the service, bypass access controls, interfere with the product, upload unlawful or harmful material, attempt to identify other users, or use automated access that burdens the service.'],
+    ['Third-party data and services','Nutrition records and AI output may come from third parties including USDA, Open Food Facts and Google Gemini. Store billing, Telegram and hosting services are also third-party services. We do not control their availability or guarantee that external data is complete.'],
+    ['Availability and changes','We aim to keep the service available but do not promise uninterrupted access. We may fix, change, suspend or discontinue features for security, legal or product reasons. Material changes to these terms will be posted here.'],
+    ['Liability','To the extent permitted by law, FatBotSlim is provided without guarantees of a particular health or weight outcome. Nothing in these terms excludes rights or liability that cannot lawfully be excluded.'],
+    ['Governing terms and contact','The service is operated by BRAININDEX OÜ, Estonia. Applicable mandatory consumer law remains unaffected. Questions: hello@brain-index.com.'],
+  ],
+});
+
+Object.assign(content.ru, {
+  privacy:'Конфиденциальность', terms:'Условия',
+  privacyTitle:'Политика конфиденциальности FatBotSlim',
+  privacyIntro:'Действует с 14 сентября 2026 года. Политика относится к приложению FatBotSlim, Telegram-боту и сайту, которыми управляет BRAININDEX OÜ, Эстония.',
+  privacySections:[
+    ['Какие данные вы предоставляете','Мы обрабатываем данные аккаунта, профиль и цели питания, записи о еде, весе и воде, обращения в поддержку, а также ограничения в питании и сведения о здоровье, которые вы решили указать. Сведения о здоровье необязательны и используются только для персональных предупреждений и рекомендаций.'],
+    ['Фото еды и ИИ-анализ','По вашему запросу выбранное фото проходит через защищённый backend и передаётся настроенному ИИ-провайдеру для распознавания еды и оценки пищевой ценности. Мы не сохраняем отправленное изображение в общей облачной базе. Если вы явно разрешили сохранить фото блюда, копия остаётся только в закрытом хранилище приложения на этом устройстве; удалить её можно в Профиле. Не отправляйте фото, не относящиеся к еде, людей или конфиденциальных документов.'],
+    ['Источники пищевой ценности','FatBotSlim может дополнять оценки данными USDA FoodData Central и Open Food Facts. В этих источниках и результатах ИИ возможны ошибки и пробелы, поэтому проверяйте порцию, состав и предупреждения. FatBotSlim не ставит диагнозы и не назначает лечение.'],
+    ['Поставщики','Supabase обеспечивает авторизацию, базу данных и backend. Google Gemini может обрабатывать текст или фото еды для ИИ-анализа. RevenueCat и Apple или Google обрабатывают статус подписки и покупки. Telegram обрабатывает взаимодействия с ботом. USDA и Open Food Facts отвечают на запросы о пищевой ценности. У каждого поставщика действуют собственные условия и политика.'],
+    ['Цели и основания обработки','Данные нужны для дневника, синхронизации аккаунта, расчёта итогов, персонализации подсказок, защиты от злоупотреблений, поддержки и управления подпиской. Основанием служит оказание сервиса, ваше согласие на необязательные сведения о здоровье или наш законный интерес в безопасности и улучшении продукта. Мы не продаём персональные данные и не используем данные о еде и здоровье для рекламы.'],
+    ['Хранение и удаление','Облачные данные дневника и профиля хранятся, пока аккаунт активен, и ограниченное время при наличии требований безопасности, закона или поддержки. Локальные фото остаются до удаления, очистки данных приложения или деинсталляции. Инициировать удаление данных FitBot можно через «Удалить аккаунт и данные» в Профиле или по адресу hello@brain-index.com. Подписку магазина нужно отменить отдельно.'],
+    ['Безопасность и международная обработка','Мы используем контроль доступа, авторизованные backend-функции и политики безопасности строк базы данных. Абсолютно безопасных онлайн-систем не существует. Поставщики могут обрабатывать данные за пределами вашей страны с применением предусмотренных ими мер трансграничной передачи.'],
+    ['Ваш выбор и права','Вы можете исправлять записи и профиль, отозвать согласие на необязательные медицинские сведения, удалить локальные фото, отключить уведомления и запросить доступ, исправление, перенос, ограничение, возражение или удаление, если это применимо. Также можно обратиться в местный орган защиты данных.'],
+    ['Дети','FatBotSlim не предназначен для детей младше 16 лет. Если ребёнок передал персональные данные, родителю или опекуну следует связаться с нами.'],
+    ['Оператор и контакты','Оператор: BRAININDEX OÜ, Эстония. Вопросы о данных и поддержка: hello@brain-index.com. При существенных изменениях мы обновим эту страницу и дату вступления в силу.'],
+  ],
+  termsTitle:'Условия использования FatBotSlim',
+  termsIntro:'Действуют с 14 сентября 2026 года. Используя FatBotSlim, вы соглашаетесь с этими условиями. Если вы не согласны, не используйте продукт.',
+  termsSections:[
+    ['Сервис','FatBotSlim — дневник питания с ИИ для записи еды и оценки калорий и нутриентов. Возможности приложения и Telegram-бота могут различаться и меняться по мере развития продукта.'],
+    ['Не медицинская консультация','Результаты — оценки, а не лабораторные измерения, диагноз или лечение. Фото не показывает каждый ингредиент, аллерген и точный размер порции. Проверяйте записи и обращайтесь к квалифицированному специалисту по вопросам заболеваний, аллергии, беременности, расстройств пищевого поведения и лечебных диет. Не используйте FatBotSlim при экстренных ситуациях.'],
+    ['Аккаунт и материалы','Указывайте достоверные данные аккаунта, защищайте способ входа и отправляйте только материалы, на которые у вас есть права. Вы отвечаете за свои записи и решения, принятые на основе результата.'],
+    ['Подписки','Платные функции, цена, период оплаты и пробный период, если он есть, показываются App Store или Google Play до покупки. Подписка продлевается автоматически, пока вы не отмените её через соответствующий магазин. Магазин обрабатывает оплату, отмену и возвраты по своим правилам. Восстановление покупки требует тот же аккаунт магазина.'],
+    ['Допустимое использование','Нельзя обходить контроль доступа, мешать работе продукта, загружать незаконные или вредоносные материалы, пытаться определить других пользователей или создавать чрезмерную автоматизированную нагрузку.'],
+    ['Сторонние данные и сервисы','Пищевая ценность и ИИ-вывод могут поступать от USDA, Open Food Facts и Google Gemini. Оплата в магазине, Telegram и хостинг также предоставляются третьими сторонами. Мы не управляем их доступностью и не гарантируем полноту внешних данных.'],
+    ['Доступность и изменения','Мы стремимся поддерживать сервис, но не обещаем бесперебойную работу. Функции могут быть исправлены, изменены, приостановлены или прекращены по причинам безопасности, закона или развития продукта. Существенные изменения условий публикуются здесь.'],
+    ['Ответственность','В пределах, разрешённых законом, FatBotSlim не гарантирует конкретный результат для здоровья или веса. Эти условия не ограничивают обязательные права потребителя и ответственность, которую нельзя исключить по закону.'],
+    ['Право и контакты','Сервисом управляет BRAININDEX OÜ, Эстония. Обязательные нормы защиты потребителей сохраняют силу. Вопросы: hello@brain-index.com.'],
+  ],
+});

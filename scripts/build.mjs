@@ -15,4 +15,4 @@ await writeFile(path.join(output,'robots.txt'),`User-agent: *\nAllow: /\n\nSitem
 await writeFile(path.join(output,'sitemap.xml'),`<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${['en','ru'].flatMap(lang=>routes.map(route=>`<url><loc>${origin}${url(lang,route)}</loc></url>`)).join('')}</urlset>`);
 await writeFile(path.join(output,'build-manifest.json'),JSON.stringify({assets,routes:['en','ru'].flatMap(l=>routes.map(r=>url(l,r)))},null,2));
 return {assets};}
-if(process.argv[1]===fileURLToPath(import.meta.url)){await build();console.log('Built 10 static content pages, 2 404 pages and preserved verification files.');}
+if(process.argv[1]===fileURLToPath(import.meta.url)){await build();console.log(`Built ${routes.length*2} static content pages, 2 404 pages and preserved verification files.`);}
