@@ -47,6 +47,14 @@
     {
       "source": "/ru/privacy",
       "destination": "/ru/privacy.html"
+    },
+    {
+      "source": "/terms",
+      "destination": "/terms.html"
+    },
+    {
+      "source": "/ru/terms",
+      "destination": "/ru/terms.html"
     }
   ],
   "headers": [
