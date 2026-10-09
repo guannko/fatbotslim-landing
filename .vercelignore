@@ -1,0 +1,10 @@
+.git
+.vercel
+node_modules
+dist
+test
+*.md
+.env*
+*.local
+images
+index.html
